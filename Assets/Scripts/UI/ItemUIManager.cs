@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -36,17 +37,15 @@ public class ItemUIManager : MonoBehaviour
     // Opens the item select UI
     public void OpenUI()
     {
-        AssignRandomItemToButtons();
-        ActivateButtons();
         this.gameObject.SetActive(true);
+        StartCoroutine(OpenUICoroutine());
     }
 
     // Closes the item select UI
     public void CloseUI()
     {
-        print("test");
-        DeactivateButtons();
         this.gameObject.SetActive(false);
+        DeactivateButtons();
     }
 
     // Sets buttons to interactable
@@ -54,6 +53,7 @@ public class ItemUIManager : MonoBehaviour
     {
         foreach (ItemButton button in buttons)
         {
+            button.gameObject.SetActive(true);
             button.uiButton.interactable = true;
         }
     }
@@ -63,6 +63,7 @@ public class ItemUIManager : MonoBehaviour
     {
         foreach (ItemButton button in buttons)
         {
+            button.gameObject.SetActive(true);
             button.uiButton.interactable = false;
         }
     }
@@ -107,6 +108,14 @@ public class ItemUIManager : MonoBehaviour
             default:
                 return new SharperClaws();
         }
+    }
+
+    private IEnumerator OpenUICoroutine()
+    {
+        AssignRandomItemToButtons();
+
+        yield return new WaitForSeconds(0.5f);
+        ActivateButtons();
     }
 }
 

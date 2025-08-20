@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 grapplePoint;
     private Vector2 move;
     private int jumpsLeft;
+    private PlatformEffector2D currentOneWayPlatform;
 
     // Attack Variables
     public bool shouldBeDamaging { get; private set; } = false;
@@ -130,7 +131,6 @@ public class PlayerController : MonoBehaviour
         controls.Player.Disable();
     }
 
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         FallThroughPlatform(collision);
@@ -170,9 +170,11 @@ public class PlayerController : MonoBehaviour
     // Let player fall through one way platforms by ignoring the collision
     private void FallThroughPlatform(Collision2D collision)
     {
-        if(move.y < -0.7f && collision.gameObject.GetComponent<PlatformEffector2D>() != null)
+
+        if (move.y < -0.7f && collision.gameObject.GetComponent<PlatformEffector2D>() != null)
         {
-            Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), collision.collider, true);
+            currentOneWayPlatform = collision.gameObject.GetComponent<PlatformEffector2D>(); // Store the platform so we don't lose it
+            Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), currentOneWayPlatform.gameObject.GetComponent<CompositeCollider2D>(), true);
             StartCoroutine(ReEnablePlatform(collision));
         }
     }
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour
             if (found) continue;
             break;
         }
-        Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), collision.collider, false); // Re-enable collision
+        Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), currentOneWayPlatform.gameObject.GetComponent<CompositeCollider2D>(), false); // Re-enable collision
         yield return null;
     }
 

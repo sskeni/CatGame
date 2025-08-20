@@ -16,7 +16,6 @@ public class ItemButton : MonoBehaviour
 
     public void SetItem(Item newItem)
     {
-        print(newItem.GiveName());
         itemName.text = newItem.GiveName();
         itemDescription.text = newItem.GiveDescription();
         item = newItem;
