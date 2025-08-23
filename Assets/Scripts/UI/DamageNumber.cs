@@ -4,20 +4,22 @@ using UnityEngine;
 public class DamageNumber : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private float floatSpeed;
     [SerializeField] private float fadeSpeed;
 
-    private RectTransform rectTransform;
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
+        rb.AddForce(new Vector2(Random.Range(-100f, 100f), Random.Range(100f, 120f)));
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        rectTransform.position = new Vector3(rectTransform.position.x, rectTransform.position.y + floatSpeed, rectTransform.position.z);
         text.alpha -= fadeSpeed;
         if (text.alpha <= 0f) Destroy(this.gameObject);
     }

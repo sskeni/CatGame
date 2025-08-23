@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 
+public delegate void OnHealthChangedEventHandler(float maxHealth, float currentHealth);
+
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     // Player Stats
@@ -13,6 +15,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float baseRegenDelay { get; private set; }
     public float baseRegenRate { get; private set; }
 
+    // Events
+    public event OnHealthChangedEventHandler OnHealthChanged;
+
     // Backend Serialized References
     [SerializeField] private float damageIFrames = 1.5f;
     [SerializeField] private float knockbackVelocity = 15f;
@@ -22,7 +27,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private PlayerController playerController;
 
     // Damage Variables
-    public float playerHealth { get; private set; }
+    private float currentHealth;
     public bool hasTakenDamage { get; set; }
     private bool isRegeningHealth = false;
     private Coroutine regenCoroutine;
@@ -30,8 +35,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-
-        playerHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     private void Start()
@@ -39,12 +43,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         baseMaxHealth = maxHealth;
         baseRegenDelay = regenDelay;
         baseRegenRate = regenRate;
+        OnHealthChanged?.Invoke(maxHealth, currentHealth);
     }
 
     public void SetMaxHealth(float newMaxHealth)
     {
         maxHealth = newMaxHealth;
-        playerHealth = maxHealth; // fully heals when setting max health
+        currentHealth = maxHealth; // fully heals when setting max health
+        OnHealthChanged?.Invoke(maxHealth, currentHealth);
     }
 
     // Damage with knockback
@@ -65,9 +71,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (hasTakenDamage == false)
         {
             hasTakenDamage = true;
-            playerHealth -= damageAmount;
+            currentHealth -= damageAmount;
             SpawnDamageNumber(damageAmount);
             StartCoroutine(DoDamageAnimation());
+            OnHealthChanged?.Invoke(maxHealth, currentHealth);
 
             // If currently regening, stop
             if (regenCoroutine != null) StopCoroutine(regenCoroutine);
@@ -115,10 +122,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Returns false if max health is reached
     public bool Heal(float healAmount)
     {
-        playerHealth += healAmount;
-        if (playerHealth >= maxHealth)
+        currentHealth += healAmount;
+        OnHealthChanged?.Invoke(maxHealth, currentHealth);
+        if  (currentHealth >= maxHealth)
         {
-            playerHealth = maxHealth;
+            currentHealth = maxHealth;
             return false;
         }
         return true;

@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
             enemies.Add(enemy);
         }
 
-        RoomHandler.Instance.SetEnemyCount(roomID.Item1, roomID.Item2, enemies.Count);
+        RoomHandler.Instance.SetEnemyCount(roomID.Item1, roomID.Item2, spawnPoints.Count);
     }
 
     private void DespawnAllEnemies()

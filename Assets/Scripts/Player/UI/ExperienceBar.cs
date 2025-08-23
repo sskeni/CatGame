@@ -6,25 +6,23 @@ public class ExperienceBar : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI experienceText;
     [SerializeField] private TextMeshProUGUI levelText;
-    private PlayerLevel playerLevel;
     private Slider slider;
 
-    void Start()
+    void Awake()
     {
-        playerLevel = PlayerController.Instance.playerLevel;
         slider = GetComponent<Slider>();
-        slider.maxValue = playerLevel.levelUpExperience;
-        slider.value = playerLevel.currentExperience;
+        PlayerController.Instance.playerLevel.OnExperienceChanged += new OnExperienceChangedEventHandler(UpdateExperienceVariables);
     }
 
-    void FixedUpdate()
+
+    private void UpdateExperienceVariables(float levelUpExperience, float currentExperience, int level)
     {
         // Update Slider
-        slider.maxValue = playerLevel.levelUpExperience;
-        slider.value = playerLevel.currentExperience;
+        slider.maxValue = levelUpExperience;
+        slider.value = currentExperience;
 
         // Update Texts
-        experienceText.text = playerLevel.currentExperience + " / " + playerLevel.levelUpExperience;
-        levelText.text = playerLevel.level.ToString();
+        experienceText.text = currentExperience + " / " + levelUpExperience;
+        levelText.text = level.ToString();
     }
 }

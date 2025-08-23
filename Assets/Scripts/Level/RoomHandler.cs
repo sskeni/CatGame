@@ -63,7 +63,7 @@ public class RoomHandler : MonoBehaviour
     {
         int currentEnemyCount = enemyCount[currentRoomID.Item1, currentRoomID.Item2];
         enemyCountText.text = currentEnemyCount + " enemies left";
-        if (currentEnemyCount == 0)
+        if (currentEnemyCount <= 0)
         {
             enemyCountText.color = Color.green;
         }

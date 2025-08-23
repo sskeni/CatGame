@@ -320,8 +320,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   // End Grapple
-   private void EndGrapple()
+    // End Grapple
+    private void EndGrapple()
     {
         joint.enabled = false;
         line.enabled = false;
@@ -439,6 +439,18 @@ public class PlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         StartCoroutine(CallItemUpdate());
+    }
+
+    // Enable controls
+    public void EnableControls()
+    {
+        controls.Player.Enable();
+    }
+
+    // Disable controls
+    public void DisableControls()
+    {
+        controls.Player.Disable();
     }
 
     // Debug Gizmos

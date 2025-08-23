@@ -37,6 +37,8 @@ public class ItemUIManager : MonoBehaviour
     // Opens the item select UI
     public void OpenUI()
     {
+        PlayerController.Instance.DisableControls();
+        Time.timeScale = 0;
         this.gameObject.SetActive(true);
         StartCoroutine(OpenUICoroutine());
     }
@@ -44,8 +46,10 @@ public class ItemUIManager : MonoBehaviour
     // Closes the item select UI
     public void CloseUI()
     {
+        Time.timeScale = 1;
         this.gameObject.SetActive(false);
         DeactivateButtons();
+        PlayerController.Instance.EnableControls();
     }
 
     // Sets buttons to interactable
@@ -114,7 +118,7 @@ public class ItemUIManager : MonoBehaviour
     {
         AssignRandomItemToButtons();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         ActivateButtons();
     }
 }

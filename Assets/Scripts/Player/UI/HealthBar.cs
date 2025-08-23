@@ -3,20 +3,17 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private PlayerHealth playerHealth;
     private Slider healthSlider;
 
-    void Start()
+    void Awake()
     {
-        playerHealth = PlayerController.Instance.playerHealth;
         healthSlider = GetComponent<Slider>();
-        healthSlider.maxValue = playerHealth.maxHealth;
-        healthSlider.value = playerHealth.playerHealth;
+        PlayerController.Instance.playerHealth.OnHealthChanged += new OnHealthChangedEventHandler(UpdateHealthVariables);
     }
 
-    void FixedUpdate()
+    private void UpdateHealthVariables(float maxHealth, float currentHealth)
     {
-        healthSlider.maxValue = playerHealth.maxHealth;
-        healthSlider.value = playerHealth.playerHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 }
