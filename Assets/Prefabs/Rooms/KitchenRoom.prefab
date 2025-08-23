@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 8672426745125343286}
   m_Layer: 6
   m_Name: KitchenRoom
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12816,7 +12816,7 @@ GameObject:
   - component: {fileID: 1770052998284166513}
   m_Layer: 6
   m_Name: OneWayTiles
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float regenDelay = 5f;
     public float regenRate = 1f;
 
+    // Base Stats
     public float baseMaxHealth { get; private set; }
     public float baseRegenDelay { get; private set; }
     public float baseRegenRate { get; private set; }
@@ -46,6 +47,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(maxHealth, currentHealth);
     }
 
+    // Sets max health
     public void SetMaxHealth(float newMaxHealth)
     {
         maxHealth = newMaxHealth;

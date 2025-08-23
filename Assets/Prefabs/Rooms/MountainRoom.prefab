@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 3862729736639294515}
   m_Layer: 6
   m_Name: OneWayTiles
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 2607804622640014650}
   m_Layer: 6
   m_Name: MountainRoom
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

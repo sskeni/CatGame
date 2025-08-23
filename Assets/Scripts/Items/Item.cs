@@ -3,6 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Item
 {
+    public virtual int maxStack() { return -1; }
+
     public abstract string GiveName();
 
     public abstract string GiveDescription();
@@ -94,6 +96,11 @@ public class CatTreat : Item
 // Decreases attack speed
 public class Milk : Item
 {
+    public override int maxStack()
+    {
+        return 5;
+    }
+
     public override string GiveName()
     {
         return "Milk";
@@ -113,6 +120,11 @@ public class Milk : Item
 // Increases critical chance
 public class LionMane : Item
 {
+    public override int maxStack()
+    {
+        return 6;
+    }
+
     public override string GiveName()
     {
         return "Lion Mane";
@@ -151,7 +163,6 @@ public class LionClaw : Item
 // Increases the amount of jumps the player can do before landing
 public class Slinky : Item
 {
-
     public override string GiveName()
     {
         return "Slinky";
@@ -171,6 +182,11 @@ public class Slinky : Item
 // Adds a small chance to do 100% of attack damage as an extra hit
 public class LuckyDice : Item
 {
+    public override int maxStack()
+    {
+        return 5;
+    }
+
     public override string GiveName()
     {
         return "Lucky Dice";
@@ -195,6 +211,11 @@ public class LuckyDice : Item
 // Adds lifesteal to attacks
 public class VampireFangs : Item
 {
+    public override int maxStack()
+    {
+        return 5;
+    }
+
     public override string GiveName()
     {
         return "Vampire Fangs";
@@ -207,7 +228,7 @@ public class VampireFangs : Item
 
     public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
     {
-        float healAmount = controller.attackDamage * 0.1f * stacks;
+        float healAmount = controller.attackDamage * 0.10f * stacks;
         controller.playerHealth.Heal(healAmount);
     }
 }

@@ -6,10 +6,10 @@ using static UnityEngine.ParticleSystem;
 
 public class ExperienceOrbParticleCollision : MonoBehaviour
 {
+    // Particle References
     private ParticleSystem ps;
     private List<Particle> particleList = new List<Particle>();
     [HideInInspector] public float experienceAmount = 1f;
-
 
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
         StartCoroutine(DestroyCoroutine()); // Destroy the particle system after for cleanup
     }
 
+    // Gets all the particles that touch the player, give the player experience and destroy them.
     private void OnParticleTrigger()
     {
         // Get list of all particles currently being triggered

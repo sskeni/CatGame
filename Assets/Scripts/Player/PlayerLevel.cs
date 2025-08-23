@@ -24,7 +24,8 @@ public class PlayerLevel : MonoBehaviour
         OnExperienceChanged?.Invoke(levelUpExperience, currentExperience, level);
     }
 
-    // Gives player set experience, also handles leveling up
+    // Gives player set experience
+    // Levels up if the player gains enough experience
     public void GiveExperience(float experience)
     {
         currentExperience = currentExperience + experience;
@@ -36,6 +37,7 @@ public class PlayerLevel : MonoBehaviour
     }
 
     // Level up
+    // Context menu for debugging purposes
     [ContextMenu("Level Up")]
     private void LevelUp()
     {

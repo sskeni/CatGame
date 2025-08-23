@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ExperienceBar : MonoBehaviour
 {
+    // UI References
     [SerializeField] private TextMeshProUGUI experienceText;
     [SerializeField] private TextMeshProUGUI levelText;
     private Slider slider;
@@ -14,7 +15,7 @@ public class ExperienceBar : MonoBehaviour
         PlayerController.Instance.playerLevel.OnExperienceChanged += new OnExperienceChangedEventHandler(UpdateExperienceVariables);
     }
 
-
+    // Updates the UI slider and text fields
     private void UpdateExperienceVariables(float levelUpExperience, float currentExperience, int level)
     {
         // Update Slider

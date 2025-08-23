@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
+    // Level Paramaters
     [SerializeField] private GameObject[] tiles;
     [SerializeField] private int tileSize;
     [SerializeField] private int levelWidth;
@@ -13,6 +14,7 @@ public class LevelGenerator : MonoBehaviour
         InstantiateLevelTiles();
     }
 
+    // Creates level tiles randomly
     private void InstantiateLevelTiles()
     {
         for (int i = 0; i < levelWidth; i++)

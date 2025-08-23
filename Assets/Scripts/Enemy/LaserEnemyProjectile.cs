@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LaserEnemyProjectile : MonoBehaviour
 {
+    // Laser Projectile Stats
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float hitDamage;
     [SerializeField] private float speed;
@@ -9,26 +10,29 @@ public class LaserEnemyProjectile : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        DamageCheck();
     }
 
-    private void DamageCheck()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(
-            origin: transform.position,
-            size: transform.localScale,
-            angle: transform.rotation.eulerAngles.z,
-            direction: transform.up,
-            distance: 0,
-            layerMask: playerLayer);
+        DamagePlayer(collision);
+        DestroyProjectile(collision);
+    }
 
-        foreach (RaycastHit2D hit in hits)
+    // Damage when hitting the player
+    private void DamagePlayer(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
-            if (hit.transform.tag == "Player")
-            {
-                hit.collider.gameObject.GetComponent<PlayerHealth>().DamageWithKnockback(hitDamage, transform.position);
-                Destroy(this.gameObject);
-            }
+            PlayerController.Instance.playerHealth.DamageWithKnockback(hitDamage, transform.position);
+        }
+    }
+
+    // Destroy when hitting the player or the ground
+    private void DestroyProjectile(Collider2D collision)
+    {
+        if (collision.tag == "Player" || collision.tag == "Ground")
+        {
+            Destroy(this.gameObject);
         }
     }
     
@@ -38,8 +42,4 @@ public class LaserEnemyProjectile : MonoBehaviour
         transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(this.gameObject);
-    }
 }

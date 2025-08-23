@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class ItemButton : MonoBehaviour
 {
+    // Item Reference
     public Item item;
+
+    // UI References
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
     public Button uiButton;
@@ -14,6 +17,7 @@ public class ItemButton : MonoBehaviour
         uiButton = GetComponent<Button>();
     }
 
+    // Set the item for the button and update UI
     public void SetItem(Item newItem)
     {
         itemName.text = newItem.GiveName();
@@ -21,6 +25,7 @@ public class ItemButton : MonoBehaviour
         item = newItem;
     }
 
+    // Gives the player the item set to this button
     public void GiveItem()
     {
         PlayerController.Instance.playerInventory.AddItem(item);

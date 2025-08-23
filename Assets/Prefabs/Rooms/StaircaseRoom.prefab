@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 2152327427228248005}
   m_Layer: 6
   m_Name: OneWayTiles
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2967,7 +2967,7 @@ GameObject:
   - component: {fileID: 1278800774191777013}
   m_Layer: 6
   m_Name: StaircaseRoom
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

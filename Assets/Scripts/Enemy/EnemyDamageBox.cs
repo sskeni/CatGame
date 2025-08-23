@@ -5,29 +5,12 @@ public class EnemyDamageBox : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float hitDamage;
 
-    private void FixedUpdate()
+    // Damages player when they enter the trigger
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        DamageCheck();
-    }
-
-    private void DamageCheck()
-    {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(
-            origin: transform.position,
-            size: transform.localScale,
-            angle: transform.rotation.eulerAngles.z,
-            direction: transform.up,
-            distance: 0,
-            layerMask: playerLayer);
-
-        foreach (RaycastHit2D hit in hits)
+        if (collision.tag == "Player")
         {
-            PlayerHealth player = hit.collider.gameObject.GetComponent<PlayerHealth>();
-
-            if (player != null)
-            {
-                player.DamageWithKnockback(hitDamage, transform.position);
-            }
+            PlayerController.Instance.playerHealth.DamageWithKnockback(hitDamage, transform.position);
         }
     }
 }

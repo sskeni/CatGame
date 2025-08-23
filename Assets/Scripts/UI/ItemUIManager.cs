@@ -9,16 +9,21 @@ using Random = UnityEngine.Random;
 
 public class ItemUIManager : MonoBehaviour
 {
+    // Singleton References
     private static ItemUIManager instance;
-
     public static ItemUIManager Instance { get { return instance; } }
 
+    // UI References
     public List<ItemButton> buttons = new List<ItemButton>();
+
+    // Private References
+    private List<Item> itemPool = new List<Item>();
 
     private void Start()
     {
         CheckSingleton();
         CloseUI();
+        PopulateItemPool();
     }
 
     // Setup singleton
@@ -34,6 +39,42 @@ public class ItemUIManager : MonoBehaviour
         }
     }
 
+    // Fills the item pool with all items
+    private void PopulateItemPool()
+    {
+        Array items = Enum.GetValues(typeof(Items));
+        for (int i = 0; i < items.Length; i++)
+        {
+            itemPool.Add(AssignItem((Items)items.GetValue(i)));
+        }
+    }
+
+    // Returns an item from the item pool
+    // Removes items that have reached max stacks
+    private Item GetItemFromPool()
+    {
+        // Get a random item
+        Item item = itemPool[Random.Range(0, itemPool.Count)];
+
+        // Check if the item has a max stack
+        if (item.maxStack() != -1)
+        {
+            // Check if player item stack is less than max stack
+            if (PlayerController.Instance.playerInventory.GetStack(item) < item.maxStack())
+            {
+                return item;
+            }
+            else // If the player has max stacks, remove item from pool and try again
+            {
+                itemPool.Remove(item);
+                return GetItemFromPool();
+            }
+        }
+
+        return item;
+
+    }
+
     // Opens the item select UI
     public void OpenUI()
     {
@@ -41,6 +82,15 @@ public class ItemUIManager : MonoBehaviour
         Time.timeScale = 0;
         this.gameObject.SetActive(true);
         StartCoroutine(OpenUICoroutine());
+    }
+
+    // Open UI Coroutine
+    private IEnumerator OpenUICoroutine()
+    {
+        AssignRandomItemToButtons();
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        ActivateButtons();
     }
 
     // Closes the item select UI
@@ -72,19 +122,17 @@ public class ItemUIManager : MonoBehaviour
         }
     }
 
+    // Assigns a random item to each button
     public void AssignRandomItemToButtons()
     {
         foreach (ItemButton button in buttons)
         {
-            // Get random item
-            Array items = Enum.GetValues(typeof(Items));
-            Items item = (Items)items.GetValue(Random.Range(0, items.Length));
-
             // Assign item
-            button.SetItem(AssignItem(item));
+            button.SetItem(GetItemFromPool());
         }
     }
 
+    // Returns Item type from Enum Items
     public Item AssignItem(Items itemToAssign)
     {
         switch (itemToAssign)
@@ -113,16 +161,9 @@ public class ItemUIManager : MonoBehaviour
                 return new SharperClaws();
         }
     }
-
-    private IEnumerator OpenUICoroutine()
-    {
-        AssignRandomItemToButtons();
-
-        yield return new WaitForSecondsRealtime(0.5f);
-        ActivateButtons();
-    }
 }
 
+// Enum to hold all item types
 public enum Items
 {
     SharperClaws,

@@ -6,15 +6,16 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private Enemy enemy;
     private Slider healthSlider;
 
-    void Start()
+    void Awake()
     {
         healthSlider = GetComponent<Slider>();
         healthSlider.maxValue = enemy.maxHealth;
-        healthSlider.value = enemy.currentHealth;
+        enemy.onEnemyDamaged += new OnEnemyDamagedEventHandler(UpdateHealth);
     }
 
-    void FixedUpdate()
+    // Updates health bar
+    private void UpdateHealth(float health)
     {
-        healthSlider.value = enemy.currentHealth;
+        healthSlider.value = health;
     }
 }
