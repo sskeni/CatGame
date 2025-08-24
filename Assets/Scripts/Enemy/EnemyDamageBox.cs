@@ -5,8 +5,8 @@ public class EnemyDamageBox : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float hitDamage;
 
-    // Damages player when they enter the trigger
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Damages player when they are in the trigger
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
