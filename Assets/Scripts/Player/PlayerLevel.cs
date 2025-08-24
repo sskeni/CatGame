@@ -1,27 +1,18 @@
 using UnityEngine;
 
-public delegate void OnExperienceChangedEventHandler(float levelUpExperience, float currentExperience, int level);
-
 public class PlayerLevel : MonoBehaviour
 {
 
     // Variables
     [SerializeField] private float initialLevelUpExperience;
-    private float levelUpExperience;
-    private float currentExperience;
-    private int level = 1;
+    public float levelUpExperience { get; private set; }
+    public float currentExperience { get; private set; }
+    public int level { get; private set; } = 1;
 
-    // Events
-    public event OnExperienceChangedEventHandler OnExperienceChanged;
 
     private void Awake()
     {
         levelUpExperience = initialLevelUpExperience;
-    }
-
-    private void Start()
-    {
-        OnExperienceChanged?.Invoke(levelUpExperience, currentExperience, level);
     }
 
     // Gives player set experience
@@ -33,7 +24,6 @@ public class PlayerLevel : MonoBehaviour
         {
             LevelUp();
         }
-        OnExperienceChanged?.Invoke(levelUpExperience, currentExperience, level);
     }
 
     // Level up

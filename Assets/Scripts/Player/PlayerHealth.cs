@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public delegate void OnHealthChangedEventHandler(float maxHealth, float currentHealth);
-
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     // Player Stats
@@ -16,9 +14,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float baseRegenDelay { get; private set; }
     public float baseRegenRate { get; private set; }
 
-    // Events
-    public event OnHealthChangedEventHandler OnHealthChanged;
-
     // Backend Serialized References
     [SerializeField] private float damageIFrames = 1.5f;
     [SerializeField] private float knockbackVelocity = 15f;
@@ -28,7 +23,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private PlayerController playerController;
 
     // Damage Variables
-    private float currentHealth;
+    public float currentHealth { get; private set; }
     public bool hasTakenDamage { get; set; }
     private bool isRegeningHealth = false;
     private Coroutine regenCoroutine;
@@ -37,14 +32,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         playerController = GetComponent<PlayerController>();
         currentHealth = maxHealth;
-    }
-
-    private void Start()
-    {
         baseMaxHealth = maxHealth;
         baseRegenDelay = regenDelay;
         baseRegenRate = regenRate;
-        OnHealthChanged?.Invoke(maxHealth, currentHealth);
     }
 
     // Sets max health
@@ -52,7 +42,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         maxHealth = newMaxHealth;
         currentHealth = maxHealth; // fully heals when setting max health
-        OnHealthChanged?.Invoke(maxHealth, currentHealth);
     }
 
     // Damage with knockback
@@ -76,7 +65,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             currentHealth -= damageAmount;
             SpawnDamageNumber(damageAmount);
             StartCoroutine(DoDamageAnimation());
-            OnHealthChanged?.Invoke(maxHealth, currentHealth);
 
             // If currently regening, stop
             if (regenCoroutine != null) StopCoroutine(regenCoroutine);
@@ -125,7 +113,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public bool Heal(float healAmount)
     {
         currentHealth += healAmount;
-        OnHealthChanged?.Invoke(maxHealth, currentHealth);
         if  (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;

@@ -10,6 +10,7 @@ public class ItemButton : MonoBehaviour
     // UI References
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
+    public Image itemImage;
     public Button uiButton;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class ItemButton : MonoBehaviour
     {
         itemName.text = newItem.GiveName();
         itemDescription.text = newItem.GiveDescription();
+        itemImage.sprite = newItem.GiveSprite();
         item = newItem;
     }
 

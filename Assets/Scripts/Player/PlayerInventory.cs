@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     // Inventory References
     public List<ItemList> items = new List<ItemList>();
 
-    // Adds an item to the inventory
+    // Adds an item to the inventory and updates UI
     public void AddItem(Item item)
     {
         foreach (ItemList i in items)
@@ -17,10 +17,13 @@ public class PlayerInventory : MonoBehaviour
             {
                 i.stacks += 1;
                 i.item.AddPlayerStats(PlayerController.Instance, i.stacks);
+                InventoryUI.Instance.UpdateItemUIStack(i);
                 return;
             }
         }
-        items.Add(new ItemList(item, item.GiveName(), 1));
+        ItemList itemToAdd = new ItemList(item, item.GiveName(), 1);
+        items.Add(itemToAdd);
+        InventoryUI.Instance.AddItemUI(itemToAdd);
         item.AddPlayerStats(PlayerController.Instance, 1);
     }
 

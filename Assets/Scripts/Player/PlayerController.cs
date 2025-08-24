@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerLevel playerLevel;
     [HideInInspector] public PlayerHealth playerHealth;
     [HideInInspector] public PlayerInventory playerInventory;
+    [HideInInspector] public PlayerControls controls;
 
     // Private References
-    private PlayerControls controls;
     private DistanceJoint2D joint;
     private LineRenderer line;
     private Animator anim;
@@ -97,8 +97,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        // Start repeating coroutines
         StartCoroutine(CallItemUpdate());
 
+        // Get base stats
         baseAttackDamage = attackDamage;
         baseSpeed = speed;
         baseAttackCooldown = attackCooldown;
@@ -441,16 +443,28 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CallItemUpdate());
     }
 
-    // Enable controls
-    public void EnableControls()
+    // Enable gameplay controls
+    public void EnablePlayControls()
     {
         controls.Player.Enable();
     }
 
-    // Disable controls
-    public void DisableControls()
+    // Disable gameplay controls
+    public void DisablePlayControls()
     {
         controls.Player.Disable();
+    }
+
+    // Enable UI controls
+    public void EnableUIControls()
+    {
+        controls.UI.Enable();
+    }
+
+    // Disables UI controls
+    public void DisableUIControls()
+    {
+        controls.UI.Disable();
     }
 
     // Debug Gizmos

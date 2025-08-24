@@ -9,13 +9,17 @@ public class HealthBar : MonoBehaviour
     void Awake()
     {
         healthSlider = GetComponent<Slider>();
-        PlayerController.Instance.playerHealth.OnHealthChanged += new OnHealthChangedEventHandler(UpdateHealthVariables);
+    }
+
+    private void Update()
+    {
+        if (PlayerController.Instance != null) UpdateHealthVariables(PlayerController.Instance.playerHealth);
     }
 
     // Updates the health bar UI
-    private void UpdateHealthVariables(float maxHealth, float currentHealth)
+    private void UpdateHealthVariables(PlayerHealth playerHealth)
     {
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
+        healthSlider.maxValue = playerHealth.maxHealth;
+        healthSlider.value = playerHealth.currentHealth;
     }
 }

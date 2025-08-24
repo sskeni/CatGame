@@ -78,7 +78,7 @@ public class ItemUIManager : MonoBehaviour
     // Opens the item select UI
     public void OpenUI()
     {
-        PlayerController.Instance.DisableControls();
+        PlayerController.Instance.DisablePlayControls();
         Time.timeScale = 0;
         this.gameObject.SetActive(true);
         StartCoroutine(OpenUICoroutine());
@@ -99,7 +99,7 @@ public class ItemUIManager : MonoBehaviour
         Time.timeScale = 1;
         this.gameObject.SetActive(false);
         DeactivateButtons();
-        PlayerController.Instance.EnableControls();
+        PlayerController.Instance.EnablePlayControls();
     }
 
     // Sets buttons to interactable

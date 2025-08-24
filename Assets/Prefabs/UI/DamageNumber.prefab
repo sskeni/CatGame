@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1959759904211555758}
   - component: {fileID: 478821216683643947}
   - component: {fileID: 1970978981267069968}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 3386061117843247757}
   - component: {fileID: 3875564790869446348}
   - component: {fileID: 1276450748998052310}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: DamageNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3122249928012135621
 MonoBehaviour:
   m_ObjectHideFlags: 0

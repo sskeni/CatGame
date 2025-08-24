@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public abstract class Item
@@ -8,6 +9,8 @@ public abstract class Item
     public abstract string GiveName();
 
     public abstract string GiveDescription();
+
+    public abstract Sprite GiveSprite();
 
     public virtual void Update(PlayerController controller, int stacks) { }
 
@@ -30,6 +33,11 @@ public class SharperClaws : Item
         return "Increases attack";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+    }
+
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
         controller.attackDamage = controller.baseAttackDamage + (1f * stacks);
@@ -47,6 +55,11 @@ public class CatNip : Item
     public override string GiveDescription()
     {
         return "Increases movement speed";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -68,6 +81,11 @@ public class CatFood : Item
         return "Increases max health";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+    }
+
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
         controller.playerHealth.SetMaxHealth(controller.playerHealth.baseMaxHealth + (5f * stacks));
@@ -85,6 +103,11 @@ public class CatTreat : Item
     public override string GiveDescription()
     {
         return "Increases health regeneration rate";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -111,6 +134,11 @@ public class Milk : Item
         return "Increases attack speed";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+    }
+
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
         controller.attackCooldown = controller.baseAttackCooldown - (controller.baseAttackCooldown * 0.1f  * stacks);
@@ -135,6 +163,11 @@ public class LionMane : Item
         return "Increases crit chance";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+    }
+
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
         controller.critChance = controller.baseCritChance + (15f * stacks);
@@ -154,6 +187,11 @@ public class LionClaw : Item
         return "Increases crit damage";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+    }
+
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
         controller.critDamage = controller.baseCritDamage + (10f * stacks);
@@ -171,6 +209,11 @@ public class Slinky : Item
     public override string GiveDescription()
     {
         return "Increases jumps";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -195,6 +238,11 @@ public class LuckyDice : Item
     public override string GiveDescription()
     {
         return "Adds a small chance to do 100% of attack damage as an extra hit";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
     }
 
     public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
@@ -224,6 +272,11 @@ public class VampireFangs : Item
     public override string GiveDescription()
     {
         return "Adds lifesteal to attacks";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
     }
 
     public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
