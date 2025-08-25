@@ -88,7 +88,7 @@ public class CatFood : Item
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
-        controller.playerHealth.SetMaxHealth(controller.playerHealth.baseMaxHealth + (5f * stacks));
+        controller.playerHealth.SetMaxHealth(controller.playerHealth.baseMaxHealth + (1f * stacks));
     }
 }
 
