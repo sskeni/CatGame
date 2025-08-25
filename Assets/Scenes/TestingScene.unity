@@ -122989,32 +122989,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUI
       objectReference: {fileID: 0}
-    - target: {fileID: 979314798618689924, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4306899367262707233, guid: c342664275f11be4f86998094c93a7e8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306899367262707233, guid: c342664275f11be4f86998094c93a7e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333148316762707662, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333148316762707662, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333148316762707662, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333148316762707662, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5582201018978521438, guid: c342664275f11be4f86998094c93a7e8, type: 3}
@@ -123024,10 +123004,6 @@ PrefabInstance:
     - target: {fileID: 5582201018978521438, guid: c342664275f11be4f86998094c93a7e8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7953977246813566482, guid: c342664275f11be4f86998094c93a7e8, type: 3}
-      propertyPath: m_Color.a
-      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 8892401290381298109, guid: c342664275f11be4f86998094c93a7e8, type: 3}
       propertyPath: m_Pivot.x
