@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    // Returns to the Main Menu
+    // Returns to the main menu
     public void MainMenu()
     {
         StartCoroutine(LoadSceneAsync());

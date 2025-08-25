@@ -19,18 +19,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private float knockbackVelocity = 15f;
     [SerializeField] private DamageNumber damageNumberPrefab;
 
-    // Player Reference
-    private PlayerController playerController;
-
     // Damage Variables
     public float currentHealth { get; private set; }
     public bool hasTakenDamage { get; set; }
     private bool isRegeningHealth = false;
     private Coroutine regenCoroutine;
+    private bool isDying = false;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
         currentHealth = maxHealth;
         baseMaxHealth = maxHealth;
         baseRegenDelay = regenDelay;
@@ -51,7 +48,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             Vector2 knockbackDirection = transform.position - otherPostiion;
             knockbackDirection = knockbackDirection.normalized;
-            playerController.rb.linearVelocity = knockbackDirection * knockbackVelocity;
+            PlayerController.Instance.rb.linearVelocity = knockbackDirection * knockbackVelocity;
             Damage(damageAmount, false); // false bc enemies cannot crit
         }
     }
@@ -69,6 +66,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             // If currently regening, stop
             if (regenCoroutine != null) StopCoroutine(regenCoroutine);
             regenCoroutine = StartCoroutine(DoRegeneration());
+
+            if (currentHealth <= 0) Die();
         }
     }
 
@@ -79,14 +78,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         while (damageTimer < damageIFrames)
         {
-            playerController.sprite.enabled = !playerController.sprite.enabled;
+            PlayerController.Instance.sprite.enabled = !PlayerController.Instance.sprite.enabled;
             damageTimer += Time.fixedDeltaTime;
             damageTimer += 0.1f; // Account for the WaitForSeconds
             yield return new WaitForSeconds(0.1f);
         }
 
-        hasTakenDamage = false; // Let the Player be damageable again
-        playerController.sprite.enabled = true; // Make sure sprite is visible at the end
+        if(!isDying) hasTakenDamage = false; // Let the Player be damageable again if they are not dead
+        PlayerController.Instance.sprite.enabled = true; // Make sure sprite is visible at the end
     }
 
     // Spawn damage number
@@ -119,5 +118,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             return false;
         }
         return true;
+    }
+
+    private void Die()
+    {
+        isDying = true;
+        PlayerController.Instance.DisablePlayControls();
+        EndScreenMenu.Instance.OpenUI();
     }
 }

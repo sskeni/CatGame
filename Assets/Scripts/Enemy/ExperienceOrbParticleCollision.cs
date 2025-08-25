@@ -14,7 +14,14 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
     private void Awake()
     {
         ps = GetComponent<ParticleSystem>();
-        StartCoroutine(DestroyCoroutine()); // Destroy the particle system after for cleanup
+    }
+
+    private void Update()
+    {
+        if (!ps.isPlaying) // Destroy the particle system once it is no longer in use
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Gets all the particles that touch the player, give the player experience and destroy them.
@@ -34,12 +41,5 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
         }
         // Replace triggered particles in particle system
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, particleList);
-    }
-
-    // Destroys the particle system shorly after all particles lifetimes have expired
-    private IEnumerator DestroyCoroutine()
-    {
-        yield return new WaitForSeconds(ps.main.startLifetime.constant + (ps.main.maxParticles * 0.1f)); // 0.1f because thats the double the interval we burst the particles at
-        Destroy(this.gameObject);
     }
 }

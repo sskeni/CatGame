@@ -14,6 +14,10 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyCountText;
     [SerializeField] private MiniMap miniMap;
 
+    // Public References
+    public int roomsCleared;
+    public int enemiesKilled;
+
     // Private References
     private int[,] enemyCount = new int[3, 3];
     private Tuple<int, int> currentRoomID;
@@ -46,6 +50,7 @@ public class RoomHandler : MonoBehaviour
     public void LowerEnemyCount(int x, int y)
     {
         enemyCount[x, y]--;
+        enemiesKilled++;
 
         if (enemyCount[x, y] == 0)
         {
@@ -59,6 +64,7 @@ public class RoomHandler : MonoBehaviour
     // Shows the Room Clear UI
     private IEnumerator ShowRoomClearText()
     {
+        roomsCleared++;
         roomClearText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         roomClearText.gameObject.SetActive(false);
