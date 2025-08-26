@@ -68,6 +68,11 @@ public class RoomHandler : MonoBehaviour
         roomClearText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         roomClearText.gameObject.SetActive(false);
+
+        if(roomsCleared == 9)
+        {
+            PlayerController.Instance.playerHealth.Die();
+        }
     }
     
     // Sets the current room that the player is in and updates UI

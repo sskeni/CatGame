@@ -120,7 +120,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         return true;
     }
 
-    private void Die()
+    public void Die()
     {
         isDying = true;
         PlayerController.Instance.DisablePlayControls();
