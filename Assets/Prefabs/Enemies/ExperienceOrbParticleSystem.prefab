@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 393041004436405718}
   - component: {fileID: 3781022892142811487}
   - component: {fileID: 179212407908883368}
+  - component: {fileID: 1982259226100878161}
   m_Layer: 0
   m_Name: ExperienceOrbParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4404625901336596609
 Transform:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -666,7 +667,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 43.7
+    angle: 42.45
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
@@ -3888,7 +3889,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
+    enabled: 1
     ratio: 0
     light: {fileID: 0}
     randomDistribution: 1
@@ -4915,3 +4916,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceAmount: 1
+--- !u!114 &1982259226100878161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685911672432163805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c085a10b55edd4db68c1d23e5df460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Prefab: {fileID: 2243991502931444384, guid: efafdc90bb7ab2143bcd8aaeaa273da2, type: 3}

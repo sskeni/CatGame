@@ -21,7 +21,7 @@ public class LaserEnemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        if (collision.tag == "Player")
         {
             playerRef = collision.gameObject;
             lookAtPlayer = true;
@@ -30,7 +30,7 @@ public class LaserEnemy : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        if (collision.tag == "Player")
         {
             playerRef = null;
             lookAtPlayer = false;

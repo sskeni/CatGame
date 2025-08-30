@@ -359,6 +359,7 @@ public class PlayerController : MonoBehaviour
     {
         shouldBeDamaging = true;
         playerHealth.hasTakenDamage = true; // Player is invincible while attacking
+        rb.gravityScale = 1; // Lower gravity while attacking
 
         while (shouldBeDamaging)
         {
@@ -396,6 +397,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerHealth.hasTakenDamage = false; // Make player attackable again
+        rb.gravityScale = 5f; // Enable gravity again
         ReturnAttackablesToDamageable();
     }
 

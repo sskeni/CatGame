@@ -6,11 +6,16 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private Enemy enemy;
     private Slider healthSlider;
 
-    void Awake()
+    private void Awake()
     {
         healthSlider = GetComponent<Slider>();
         healthSlider.maxValue = enemy.maxHealth;
         enemy.onEnemyDamaged += new OnEnemyDamagedEventHandler(UpdateHealth);
+    }
+
+    private void Update()
+    {
+        transform.rotation = Quaternion.identity; // Keep the UI upright
     }
 
     // Updates health bar
