@@ -11,10 +11,12 @@ public class ToolTipManager : MonoBehaviour
 
     // UI Refences
     public TextMeshProUGUI textUI;
+    private RectTransform rect;
 
     private void Awake()
     {
         CheckSingleton();
+        rect = GetComponent<RectTransform>();
     }
 
     private void Start()
@@ -24,12 +26,12 @@ public class ToolTipManager : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.position = Input.mousePosition;
+        FollowMouse();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position = Input.mousePosition;
+        FollowMouse();
     }
 
     // Sets up Singleton
@@ -57,5 +59,14 @@ public class ToolTipManager : MonoBehaviour
     {
         gameObject.SetActive(false);
         textUI.text = string.Empty;
+    }
+
+    // Makes the tool tip follow the mouse
+    private void FollowMouse()
+    {
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        targetPos.z = 0;
+        rect.position = targetPos;
+        //rect.anchoredPosition = Input.mousePosition;
     }
 }

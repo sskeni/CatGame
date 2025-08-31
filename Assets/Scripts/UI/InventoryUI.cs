@@ -76,9 +76,11 @@ public class InventoryUI : MonoBehaviour
     {
         GameObject itemObject = Instantiate(
                 itemPrefab,
-                new Vector3((basePosition.position.x + (120 * xOffset)),
-                basePosition.position.y, basePosition.position.z), Quaternion.identity);
+                Vector3.zero,
+                Quaternion.identity);
         itemObject.transform.SetParent(basePosition.transform);
+        itemObject.GetComponent<RectTransform>().anchoredPosition = new Vector3((125f * xOffset), 0f, 0f);
+        itemObject.transform.localScale = Vector3.one;
 
         ItemUI itemUI = itemObject.GetComponent<ItemUI>();
         itemUI.SetItem(itemList);
