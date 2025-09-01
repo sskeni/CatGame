@@ -4,12 +4,20 @@ public class WindUpMouseEnemy: MonoBehaviour
 {
     // Component References
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private GameObject eyeLight;
 
     // Move Stats
     [SerializeField] private float moveSpeed;
 
     // Private References
     private GameObject playerRef;
+    private float eyeInitialPos;
+
+    private void Start()
+    {
+        eyeInitialPos = eyeLight.transform.localPosition.x;
+    }
 
     private void FixedUpdate()
     {
@@ -40,10 +48,14 @@ public class WindUpMouseEnemy: MonoBehaviour
             if(playerRef.transform.position.x < transform.position.x) // Move right
             {
                 rb.AddForce(new Vector2(-moveSpeed, 0f));
+                sprite.flipX = true; // Look right
+                eyeLight.transform.localPosition = new Vector3(-eyeInitialPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
             }
             else // Move left
             {
                 rb.AddForce(new Vector2(moveSpeed, 0f));
+                sprite.flipX = false; // Look left
+                eyeLight.transform.localPosition = new Vector3(eyeInitialPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
             }
         }
     }
