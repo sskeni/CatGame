@@ -35,15 +35,15 @@ public class SharperClaws : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/SharperClaws");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
-        controller.attackDamage = controller.baseAttackDamage + (1f * stacks);
+        controller.attackDamage = controller.baseAttackDamage + (0.25f * stacks);
     }
 }
-
+     
 // Increases movement speed
 public class CatNip : Item
 {
@@ -59,7 +59,7 @@ public class CatNip : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/CatNip");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -83,7 +83,7 @@ public class CatFood : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/CatFood");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -107,7 +107,7 @@ public class CatTreat : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/CatTreat");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -136,7 +136,7 @@ public class Milk : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/Milk");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -165,7 +165,7 @@ public class LionMane : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/LionMane");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -189,7 +189,7 @@ public class LionClaw : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/LionClaw");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -213,7 +213,7 @@ public class Slinky : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/Slinky");
     }
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
@@ -242,7 +242,7 @@ public class LuckyDice : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/LuckyDice");
     }
 
     public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
@@ -276,7 +276,7 @@ public class VampireFangs : Item
 
     public override Sprite GiveSprite()
     {
-        return (Sprite)Resources.Load("Item Images/TempItemImage", typeof(Sprite));
+        return Resources.Load<Sprite>("Item Images/VampireFangs");
     }
 
     public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
