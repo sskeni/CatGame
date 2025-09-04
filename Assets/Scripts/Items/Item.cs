@@ -194,7 +194,7 @@ public class LionClaw : Item
 
     public override void AddPlayerStats(PlayerController controller, int stacks)
     {
-        controller.critDamage = controller.baseCritDamage + (10f * stacks);
+        controller.critDamage = controller.baseCritDamage + (25f * stacks);
     }
 }
 

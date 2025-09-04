@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class DamageNumber : MonoBehaviour
 {
+    // UI References
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private float fadeSpeed;
 
+    // Private References
+    private Color critColor;
     private Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        ColorUtility.TryParseHtmlString("#a83f48", out critColor);
     }
 
     private void Start()
@@ -41,7 +45,7 @@ public class DamageNumber : MonoBehaviour
     {
         if (wasCrit)
         {
-            text.color = Color.red;
+            text.color = critColor;
             text.fontSize *= 1.5f;
         }
     }

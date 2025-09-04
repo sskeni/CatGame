@@ -8,6 +8,7 @@ public class MiniMap : MonoBehaviour
     // UI References
     [SerializeField] private TArray<Image> rooms = new Image[3,3];
     [SerializeField] private Image currentRoomMarker;
+    [SerializeField] private Color completedRoomColor;
 
     // Sets the cursor to the position of a given room
     public void SetCurrentRoom(int x, int y)
@@ -20,6 +21,6 @@ public class MiniMap : MonoBehaviour
     {
         Image completedRoom = rooms[x, y];
 
-        completedRoom.color = Color.green;
+        completedRoom.color = completedRoomColor;
     }
 }

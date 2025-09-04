@@ -108,7 +108,6 @@ public class ItemUIManager : MonoBehaviour
         foreach (ItemButton button in buttons)
         {
             button.gameObject.SetActive(true);
-            button.uiButton.interactable = true;
         }
     }
 
@@ -117,8 +116,7 @@ public class ItemUIManager : MonoBehaviour
     {
         foreach (ItemButton button in buttons)
         {
-            button.gameObject.SetActive(true);
-            button.uiButton.interactable = false;
+            button.gameObject.SetActive(false);
         }
     }
 

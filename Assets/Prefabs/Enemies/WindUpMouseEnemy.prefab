@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 474447055186503079}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.357, y: -0.114, z: 0}
+  m_LocalPosition: {x: 0.261, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,7 +458,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -525,17 +525,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007955015, y: 0.085914135}
+  m_Offset: {x: -0.020520985, y: 0.12090962}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.6485704, y: 0.42149165}
-    oldSize: {x: 1.96875, y: 1.15625}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0.634384, y: 0.3851627}
+    oldSize: {x: 2, y: 1}
+    newSize: {x: 2, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1368257, y: 1.1654637}
+  m_Size: {x: 0.9385642, y: 0.95026696}
   m_EdgeRadius: 0
 --- !u!114 &8080184068828007648
 MonoBehaviour:
@@ -588,8 +588,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: -0.29250336, y: 0.090782166, z: 0}
-      m_Extent: {x: 0.9343643, y: 0.5281143, z: 0}
+      m_Center: {x: -0.23410797, y: 0.11483002, z: 0}
+      m_Extent: {x: 0.9153366, y: 0.44998932, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.05
     m_FlipX: 0
@@ -710,6 +710,10 @@ PrefabInstance:
     - target: {fileID: 384815758286948785, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702200621273332302, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1102405583471318466, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}
       propertyPath: m_Pivot.x
