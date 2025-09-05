@@ -548,6 +548,7 @@ GameObject:
   - component: {fileID: 6471252631197897863}
   - component: {fileID: 8652809615050901885}
   - component: {fileID: 974758419144967316}
+  - component: {fileID: 2285367231880445667}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -687,7 +688,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.015004039}
+  m_Offset: {x: 0, y: 0.027864754}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -697,7 +698,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.9699919}
+  m_Size: {x: 1, y: 0.9442705}
   m_EdgeRadius: 0
 --- !u!232 &6988234352395565208
 DistanceJoint2D:
@@ -1008,3 +1009,16 @@ MonoBehaviour:
     - rid: 4068431194876543070
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &2285367231880445667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820732797691108619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d14e737e2cc4cd4cb849931c195afe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 0

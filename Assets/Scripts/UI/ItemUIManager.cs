@@ -51,7 +51,7 @@ public class ItemUIManager : MonoBehaviour
 
     // Returns an item from the item pool
     // Removes items that have reached max stacks
-    private Item GetItemFromPool()
+    public Item GetItemFromPool()
     {
         // Get a random item
         Item item = itemPool[Random.Range(0, itemPool.Count)];

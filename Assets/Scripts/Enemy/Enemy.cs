@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     // Enemy Prefabs
     [SerializeField] private DamageNumber damageNumberPrefab;
-    [SerializeField] private GameObject experienceOrbParticleSystem;
+    [SerializeField] private GameObject experienceOrbParticleSystemPrefab;
+    [SerializeField] private GameObject coinPrefab;
 
     // Damage References
     public float currentHealth { get; private set; }
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             isDying = true;
             SpawnExperienceOrbs();
+            SpawnCoins();
             RoomHandler.Instance.LowerEnemyCount(roomID.Item1, roomID.Item2);
             Destroy(gameObject);
         }
@@ -74,13 +76,24 @@ public class Enemy : MonoBehaviour, IDamageable
     // Spawns experience orbs by instantiating a particle system
     private void SpawnExperienceOrbs()
     {
-        if (experienceOrbParticleSystem != null && PlayerController.Instance != null)
+        if (experienceOrbParticleSystemPrefab != null && PlayerController.Instance != null)
         {
-            GameObject p = Instantiate(experienceOrbParticleSystem);
+            GameObject p = Instantiate(experienceOrbParticleSystemPrefab);
             p.transform.position = this.transform.position;
             p.GetComponent<ExperienceOrbParticleCollision>().experienceAmount = experienceAmount;
             p.GetComponent<ParticleSystem>().trigger.AddCollider(PlayerController.Instance.gameObject.GetComponent<BoxCollider2D>());
             p.gameObject.SetActive(true);
+        }
+    }
+
+    // Spawns coins by instantiating a random amount of game objects
+    private void SpawnCoins()
+    {
+        int coinNum = Random.Range(0, 4);
+        for (int i = 0; i <= coinNum; i++)
+        {
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+            Instantiate(coinPrefab, spawnPos, Quaternion.identity);
         }
     }
 }
