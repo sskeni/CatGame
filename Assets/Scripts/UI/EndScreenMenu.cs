@@ -21,6 +21,7 @@ public class EndScreenMenu : MonoBehaviour
     public TextMeshProUGUI roomsClearedText;
     public TextMeshProUGUI enemiesKilledText;
     public TextMeshProUGUI coinCountText;
+    public TextMeshProUGUI chestCountText;
 
     // Private References
     private float timeStarted;
@@ -66,6 +67,7 @@ public class EndScreenMenu : MonoBehaviour
         roomsClearedText.text = "Rooms Cleared: " + RoomHandler.Instance.roomsCleared;
         enemiesKilledText.text = "Enemies Killed: " + RoomHandler.Instance.enemiesKilled;
         coinCountText.text = "x " + PlayerCoins.Instance.TotalCoinCount();
+        chestCountText.text = "x " + RoomHandler.Instance.chestsOpened;
         gameObject.SetActive(true);
     }
 

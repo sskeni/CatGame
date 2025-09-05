@@ -58,6 +58,9 @@ public class ItemChest : Interactable
             Item ItemToGive = ItemUIManager.Instance.GetItemFromPool();
             PlayerController.Instance.playerInventory.AddItem(ItemToGive);
 
+            // Keep track of chest count
+            RoomHandler.Instance.chestsOpened++;
+
             bought = true;
             uiPrompt.SetActive(false);
         }

@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class ChestSpawner : MonoBehaviour
 {
     public GameObject chestPrefab;
-    public int chestCount;
+    public int maxChests;
 
     // Private References
     private List<GameObject> spawnPoints = new List<GameObject>();
@@ -25,7 +25,7 @@ public class ChestSpawner : MonoBehaviour
         }
     }
 
-    // Gets all the spawn locations for enemies
+    // Gets all the spawn points for chests
     private void GetAllSpawnPoints()
     {
         int childNumber = transform.childCount;
@@ -35,11 +35,11 @@ public class ChestSpawner : MonoBehaviour
         }
     }
 
-    // Spawns chests at all spawn points
+    // Spawns random amount of chests up to maxChests at random spawn points
     private void SpawnAllChests()
     {
         spawned = true;
-        int[] randomIndexes = RandomChestIDs(chestCount, spawnPoints.Count);
+        int[] randomIndexes = RandomChestIDs(Random.Range(1, maxChests), spawnPoints.Count);
         for (int i = 0; i < randomIndexes.Length; i++)
         {
             SpawnChest(spawnPoints[randomIndexes[i]].transform);
@@ -49,8 +49,8 @@ public class ChestSpawner : MonoBehaviour
     // Spawns a chest at a transform
     private void SpawnChest(Transform spawnLocation)
     {
-        // Move the position down by 0.5 to put it on the ground
-        Vector3 spawnPosition = new Vector3(spawnLocation.position.x, spawnLocation.position.y - 0.5f, spawnLocation.position.z);
+        // Move the position down by 0.63f to put it on the ground
+        Vector3 spawnPosition = new Vector3(spawnLocation.position.x, spawnLocation.position.y - 0.63f, spawnLocation.position.z);
         Instantiate(chestPrefab, spawnPosition, Quaternion.identity);
     }
 

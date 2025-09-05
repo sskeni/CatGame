@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RoomHandler : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyCountText;
     [SerializeField] private MiniMap miniMap;
 
+    // Public Variables
+    public GameObject coinPrefab;
+    public int minCoinsAward;
+    public int maxCoinsAward;
+    
     // Public References
-    public int roomsCleared;
-    public int enemiesKilled;
+    [HideInInspector] public int roomsCleared;
+    [HideInInspector] public int enemiesKilled;
+    [HideInInspector] public int chestsOpened;
 
     // Private References
     private int[,] enemyCount = new int[3, 3];
@@ -55,6 +62,7 @@ public class RoomHandler : MonoBehaviour
         if (enemyCount[x, y] == 0)
         {
             StartCoroutine(ShowRoomClearText());
+            StartCoroutine(SpawnCoins());
 
             miniMap.SetRoomAsComplete(x, y);
         }
@@ -75,6 +83,17 @@ public class RoomHandler : MonoBehaviour
         }
     }
     
+    // Spawns a random amount of coins on room clear
+    private IEnumerator SpawnCoins()
+    {
+        int coinCount = Random.Range(minCoinsAward, maxCoinsAward);
+        for (int i = 0; i <= coinCount; i++)
+        {
+            Instantiate(coinPrefab, PlayerController.Instance.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     // Sets the current room that the player is in and updates UI
     public void SetCurrentRoomID(Tuple<int, int> ID)
     {
