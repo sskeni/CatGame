@@ -11,6 +11,7 @@ public class ToolTipManager : MonoBehaviour
 
     // UI Refences
     public TextMeshProUGUI textUI;
+    public float positionOffset;
     private RectTransform rect;
 
     private void Awake()
@@ -64,8 +65,8 @@ public class ToolTipManager : MonoBehaviour
     // Makes the tool tip follow the mouse
     private void FollowMouse()
     {
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        targetPos.z = 0;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 targetPos = new Vector3(mousePos.x + positionOffset, mousePos.y + positionOffset, 0f);
         rect.position = targetPos;
         //rect.anchoredPosition = Input.mousePosition;
     }

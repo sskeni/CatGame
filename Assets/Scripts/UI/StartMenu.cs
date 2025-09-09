@@ -19,7 +19,7 @@ public class StartMenu : MonoBehaviour
     // Load the scene asyncronously for future loading screen
     private IEnumerator LoadAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TestingScene");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Gameplay");
 
         while (!asyncLoad.isDone)
         {

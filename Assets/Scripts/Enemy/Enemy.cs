@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public delegate void OnEnemyDamagedEventHandler(float currentHealth);
-
 public class Enemy : MonoBehaviour, IDamageable
 {
     // Enemy Stats
     [SerializeField] public float maxHealth;
     [SerializeField] private float experienceAmount;
+    [SerializeField] private float healthVariance;
 
     // Enemy Prefabs
+    [SerializeField] private EnemyHealthBar healthBar;
     [SerializeField] private DamageNumber damageNumberPrefab;
     [SerializeField] private GameObject experienceOrbParticleSystemPrefab;
     [SerializeField] private GameObject coinPrefab;
@@ -20,17 +20,22 @@ public class Enemy : MonoBehaviour, IDamageable
     public bool hasTakenDamage { get; set; }
     private bool isDying;
 
-    // Events
-    public event OnEnemyDamagedEventHandler onEnemyDamaged;
-
     // Room ID
     private Tuple<int, int> roomID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        SetUpHealth();
+    }
+
+    private void SetUpHealth()
+    {
+        maxHealth *= DifficultyHandler.Instance.difficulty;
+        //maxHealth *= Random.Range(1f - healthVariance, 1f);
         currentHealth = maxHealth;
-        onEnemyDamaged?.Invoke(currentHealth);
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetCurrentHealth(currentHealth);
     }
 
     // Damages the enemy
@@ -39,7 +44,7 @@ public class Enemy : MonoBehaviour, IDamageable
         hasTakenDamage = true;
         currentHealth -= damageAmount;
         SpawnDamageNumber(damageAmount, wasCrit);
-        onEnemyDamaged?.Invoke(currentHealth);
+        healthBar.SetCurrentHealth(currentHealth);
 
         if (currentHealth <= 0) Die();
     }

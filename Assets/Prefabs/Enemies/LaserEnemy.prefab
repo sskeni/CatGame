@@ -320,9 +320,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1644112981037856239}
-  - component: {fileID: 711104490603874713}
   - component: {fileID: 6804403363115384609}
   - component: {fileID: 2201594233090835}
+  - component: {fileID: 711104490603874713}
   m_Layer: 8
   m_Name: LaserEnemy
   m_TagString: Untagged
@@ -348,23 +348,6 @@ Transform:
   - {fileID: 5657041827777129955}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &711104490603874713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7606495568773148417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207c7be355c530a4db387aae2cbf644f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  experienceAmount: 10
-  damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
-  experienceOrbParticleSystemPrefab: {fileID: 8685911672432163805, guid: e17c3b0e10cef4d41a9d04de6484a1eb, type: 3}
-  coinPrefab: {fileID: 7020237724517999924, guid: 1a4823a5fc03f35459f4fac62ba099b5, type: 3}
 --- !u!61 &6804403363115384609
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -425,6 +408,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
   m_Priority: 0
+--- !u!114 &711104490603874713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606495568773148417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207c7be355c530a4db387aae2cbf644f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  experienceAmount: 10
+  healthVariance: 0
+  healthBar: {fileID: 2203971011752958768}
+  damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
+  experienceOrbParticleSystemPrefab: {fileID: 8685911672432163805, guid: e17c3b0e10cef4d41a9d04de6484a1eb, type: 3}
+  coinPrefab: {fileID: 7020237724517999924, guid: 1a4823a5fc03f35459f4fac62ba099b5, type: 3}
 --- !u!1001 &7732942689477983599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -586,6 +588,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}
+--- !u!114 &2203971011752958768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8486749355494270559, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}
+  m_PrefabInstance: {fileID: 7732942689477983599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3836ad8c2a10d428d81c55b2e743a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7213753326511253677 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1102405583471318466, guid: 62cad76b50bbdbb4a997dce89234a35f, type: 3}

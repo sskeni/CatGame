@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6269819971651617270}
   - component: {fileID: 2236580085395425892}
   - component: {fileID: 8564225310471116348}
+  - component: {fileID: 5001892744342808791}
   m_Layer: 10
   m_Name: ItemUI
   m_TagString: Untagged
@@ -94,6 +95,20 @@ MonoBehaviour:
   itemList:
     name: 
     stacks: 0
+--- !u!114 &5001892744342808791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173713653480820665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7aa7d70e66a1ec42b222cbc3388e900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.1
+  scaleDuration: 0.2
 --- !u!1 &4336798612297858195
 GameObject:
   m_ObjectHideFlags: 0

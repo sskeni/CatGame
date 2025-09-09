@@ -10,7 +10,6 @@ public class EnemyHealthBar : MonoBehaviour
     {
         healthSlider = GetComponent<Slider>();
         healthSlider.maxValue = enemy.maxHealth;
-        enemy.onEnemyDamaged += new OnEnemyDamagedEventHandler(UpdateHealth);
     }
 
     private void Update()
@@ -18,9 +17,13 @@ public class EnemyHealthBar : MonoBehaviour
         transform.rotation = Quaternion.identity; // Keep the UI upright
     }
 
-    // Updates health bar
-    private void UpdateHealth(float health)
+    public void SetCurrentHealth(float health)
     {
         healthSlider.value = health;
+    }
+
+    public void SetMaxHealth(float maxHealth)
+    {
+        healthSlider.maxValue = maxHealth;
     }
 }

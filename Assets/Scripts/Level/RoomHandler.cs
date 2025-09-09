@@ -19,6 +19,7 @@ public class RoomHandler : MonoBehaviour
     public GameObject coinPrefab;
     public int minCoinsAward;
     public int maxCoinsAward;
+    public float roomDifficultyIncrease;
     
     // Public References
     [HideInInspector] public int roomsCleared;
@@ -72,6 +73,8 @@ public class RoomHandler : MonoBehaviour
     // Shows the Room Clear UI
     private IEnumerator ShowRoomClearText()
     {
+        DifficultyHandler.Instance.difficulty += roomDifficultyIncrease;
+
         roomsCleared++;
         roomClearText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
