@@ -284,4 +284,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverScale: 1.1
   scaleDuration: 0.2
-  canClick: 1
+  canClick: 0

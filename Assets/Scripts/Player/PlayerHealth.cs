@@ -4,19 +4,7 @@ using UnityEngine.U2D;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    // Player Stats
-    public float maxHealth = 10f;
-    public float regenDelay = 5f;
-    public float regenRate = 1f;
-
-    // Base Stats
-    public float baseMaxHealth { get; private set; }
-    public float baseRegenDelay { get; private set; }
-    public float baseRegenRate { get; private set; }
-
-    // Backend Serialized References
-    [SerializeField] private float damageIFrames = 1.5f;
-    [SerializeField] private float knockbackVelocity = 15f;
+    // Prefab References
     [SerializeField] private DamageNumber damageNumberPrefab;
 
     // Damage Variables
@@ -28,17 +16,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        currentHealth = maxHealth;
-        baseMaxHealth = maxHealth;
-        baseRegenDelay = regenDelay;
-        baseRegenRate = regenRate;
+        currentHealth = PlayerStats.Instance.maxHealth;
     }
 
-    // Sets max health
+    // Fully heals when setting max health
     public void SetMaxHealth(float newMaxHealth)
     {
-        maxHealth = newMaxHealth;
-        currentHealth = maxHealth; // fully heals when setting max health
+        currentHealth = PlayerStats.Instance.maxHealth; 
     }
 
     // Damage with knockback
@@ -48,7 +32,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             Vector2 knockbackDirection = transform.position - otherPostiion;
             knockbackDirection = knockbackDirection.normalized;
-            PlayerController.Instance.rb.linearVelocity = knockbackDirection * knockbackVelocity;
+            PlayerController.Instance.rb.linearVelocity = knockbackDirection * PlayerStats.Instance.knockbackVelocity;
             Damage(damageAmount, false); // false bc enemies cannot crit
         }
     }
@@ -76,7 +60,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         float damageTimer = 0f;
 
-        while (damageTimer < damageIFrames)
+        while (damageTimer < PlayerStats.Instance.damageIFrames)
         {
             PlayerController.Instance.sprite.enabled = !PlayerController.Instance.sprite.enabled;
             damageTimer += Time.fixedDeltaTime;
@@ -99,11 +83,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Health regeneration coroutine
     private IEnumerator DoRegeneration()
     {
-        yield return new WaitForSeconds(regenDelay);
+        yield return new WaitForSeconds(PlayerStats.Instance.regenDelay);
         isRegeningHealth = true;
         while (isRegeningHealth)
         {
-            isRegeningHealth = Heal(regenRate);
+            isRegeningHealth = Heal(PlayerStats.Instance.regenRate);
             yield return new WaitForSeconds(0.25f);
         }
     }
@@ -112,9 +96,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public bool Heal(float healAmount)
     {
         currentHealth += healAmount;
-        if  (currentHealth >= maxHealth)
+        if  (currentHealth >= PlayerStats.Instance.maxHealth)
         {
-            currentHealth = maxHealth;
+            currentHealth = PlayerStats.Instance.maxHealth;
             return false;
         }
         return true;
@@ -124,6 +108,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         isDying = true;
         PlayerController.Instance.DisablePlayControls();
-        EndScreenMenu.Instance.OpenUI();
+        EndScreenUI.Instance.OpenUI();
     }
 }

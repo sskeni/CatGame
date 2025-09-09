@@ -13,7 +13,7 @@ public class RoomHandler : MonoBehaviour
     // UI References
     [SerializeField] private TextMeshProUGUI roomClearText;
     [SerializeField] private TextMeshProUGUI enemyCountText;
-    [SerializeField] private MiniMap miniMap;
+    [SerializeField] private MiniMapUI miniMap;
 
     // Public Variables
     public GameObject coinPrefab;

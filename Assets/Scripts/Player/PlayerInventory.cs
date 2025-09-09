@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
             if (i.name == item.GiveName())
             {
                 i.stacks += 1;
-                i.item.AddPlayerStats(PlayerController.Instance, i.stacks);
+                i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
                 InventoryUI.Instance.UpdateItemUIStack(i);
                 return;
             }
@@ -24,7 +24,7 @@ public class PlayerInventory : MonoBehaviour
         ItemList itemToAdd = new ItemList(item, item.GiveName(), 1);
         items.Add(itemToAdd);
         InventoryUI.Instance.AddItemUI(itemToAdd);
-        item.AddPlayerStats(PlayerController.Instance, 1);
+        item.AddPlayerStats(PlayerStats.Instance, 1);
     }
 
     // Returns the number of stacks of the given item

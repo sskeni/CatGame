@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EndScreenMenu : MonoBehaviour
+public class EndScreenUI : MonoBehaviour
 {
     // Singleton References
-    private static EndScreenMenu instance;
-    public static EndScreenMenu Instance { get { return instance; } }
+    private static EndScreenUI instance;
+    public static EndScreenUI Instance { get { return instance; } }
 
     // UI References
     public TextMeshProUGUI timerText;
@@ -58,11 +58,11 @@ public class EndScreenMenu : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
         levelText.text = "Level " + PlayerController.Instance.playerLevel.level;
-        healthText.text = "Health: " + PlayerController.Instance.playerHealth.maxHealth;
-        healthRegenRateText.text = "Health Regen Rate: " + PlayerController.Instance.playerHealth.regenRate;
-        attackText.text = "Attack: " + PlayerController.Instance.attackDamage;
-        critRateText.text = "Critical Rate: " + PlayerController.Instance.critChance + "%";
-        critDamageText.text = "Critical Damage: " + PlayerController.Instance.critDamage + "%";
+        healthText.text = "Health: " + PlayerStats.Instance.maxHealth;
+        healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.regenRate;
+        attackText.text = "Attack: " + PlayerStats.Instance.attackDamage;
+        critRateText.text = "Critical Rate: " + PlayerStats.Instance.critChance + "%";
+        critDamageText.text = "Critical Damage: " + PlayerStats.Instance.critDamage + "%";
 
         roomsClearedText.text = "Rooms Cleared: " + RoomHandler.Instance.roomsCleared;
         enemiesKilledText.text = "Enemies Killed: " + RoomHandler.Instance.enemiesKilled;

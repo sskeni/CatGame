@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
     // Updates the health bar UI
     private void UpdateHealthVariables(PlayerHealth playerHealth)
     {
-        healthSlider.maxValue = playerHealth.maxHealth;
+        healthSlider.maxValue = PlayerStats.Instance.maxHealth;
         healthSlider.value = playerHealth.currentHealth;
     }
 }

@@ -55,7 +55,7 @@ public class ItemChest : Interactable
             PlayerCoins.Instance.RemoveCoins(cost);
 
             // Give a random item from the item pool
-            Item ItemToGive = ItemUIManager.Instance.GetItemFromPool();
+            Item ItemToGive = ItemPoolManager.Instance.GetItemFromPool();
             PlayerController.Instance.playerInventory.AddItem(ItemToGive);
 
             ItemGivenUI.Instance.SetItem(ItemToGive);

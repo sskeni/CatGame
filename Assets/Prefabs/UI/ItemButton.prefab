@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverScale: 1.1
   scaleDuration: 0.2
-  canClick: 1
+  canClick: 0
 --- !u!1 &1784800465660203191
 GameObject:
   m_ObjectHideFlags: 0

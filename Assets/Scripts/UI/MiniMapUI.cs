@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MiniMap : MonoBehaviour
+public class MiniMapUI : MonoBehaviour
 {
     // UI References
     [SerializeField] private TArray<Image> rooms = new Image[3,3];

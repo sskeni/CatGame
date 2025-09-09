@@ -14,9 +14,9 @@ public abstract class Item
 
     public virtual void Update(PlayerController controller, int stacks) { }
 
-    public virtual void AddPlayerStats(PlayerController controller, int stacks) { }
+    public virtual void AddPlayerStats(PlayerStats stats, int stacks) { }
 
-    public virtual void OnHit(PlayerController controller, IDamageable damageable, int stacks) { }
+    public virtual void OnHit(PlayerStats stats, IDamageable damageable, int stacks) { }
 }
 
 
@@ -38,12 +38,12 @@ public class SharperClaws : Item
         return Resources.Load<Sprite>("Item Images/SharperClaws");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.attackDamage = controller.baseAttackDamage + (0.25f * stacks);
+        stats.attackDamage = stats.baseAttackDamage + (0.25f * stacks);
     }
 }
-     
+
 // Increases movement speed
 public class CatNip : Item
 {
@@ -62,9 +62,9 @@ public class CatNip : Item
         return Resources.Load<Sprite>("Item Images/CatNip");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.speed = controller.baseSpeed + (5f * stacks);
+        stats.speed = stats.baseSpeed + (5f * stacks);
     }
 }
 
@@ -86,9 +86,10 @@ public class CatFood : Item
         return Resources.Load<Sprite>("Item Images/CatFood");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.playerHealth.SetMaxHealth(controller.playerHealth.baseMaxHealth + (1f * stacks));
+        stats.maxHealth = stats.baseMaxHealth + (1f * stacks);
+        PlayerController.Instance.playerHealth.SetMaxHealth(stats.maxHealth);
     }
 }
 
@@ -110,9 +111,9 @@ public class CatTreat : Item
         return Resources.Load<Sprite>("Item Images/CatTreat");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.playerHealth.regenRate = controller.playerHealth.baseRegenRate + (0.5f * stacks);
+        stats.regenRate = stats.baseRegenRate + (0.5f * stacks);
     }
 }
 
@@ -139,9 +140,9 @@ public class Milk : Item
         return Resources.Load<Sprite>("Item Images/Milk");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.attackCooldown = controller.baseAttackCooldown - (controller.baseAttackCooldown * 0.1f  * stacks);
+        stats.attackCooldown = stats.baseAttackCooldown - (stats.baseAttackCooldown * 0.1f  * stacks);
     }
 }
 
@@ -168,9 +169,9 @@ public class LionMane : Item
         return Resources.Load<Sprite>("Item Images/LionMane");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.critChance = controller.baseCritChance + (15f * stacks);
+        stats.critChance = stats.baseCritChance + (15f * stacks);
     }
 }
 
@@ -192,9 +193,9 @@ public class LionClaw : Item
         return Resources.Load<Sprite>("Item Images/LionClaw");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.critDamage = controller.baseCritDamage + (25f * stacks);
+        stats.critDamage = stats.baseCritDamage + (25f * stacks);
     }
 }
 
@@ -216,9 +217,9 @@ public class Slinky : Item
         return Resources.Load<Sprite>("Item Images/Slinky");
     }
 
-    public override void AddPlayerStats(PlayerController controller, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        controller.maxJumps = 1 + stacks;
+        stats.maxJumps = 1 + stacks;
     }
 }
 
@@ -245,13 +246,13 @@ public class LuckyDice : Item
         return Resources.Load<Sprite>("Item Images/LuckyDice");
     }
 
-    public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
+    public override void OnHit(PlayerStats stats, IDamageable damageable, int stacks)
     {
         int procChance = 5 * stacks;
 
         if (Random.Range(1, 101) <= procChance)
         {
-            damageable.Damage(controller.attackDamage, false);
+            damageable.Damage(stats.attackDamage, false);
         }
     }
 }
@@ -279,9 +280,9 @@ public class VampireFangs : Item
         return Resources.Load<Sprite>("Item Images/VampireFangs");
     }
 
-    public override void OnHit(PlayerController controller, IDamageable damageable, int stacks)
+    public override void OnHit(PlayerStats stats, IDamageable damageable, int stacks)
     {
-        float healAmount = controller.attackDamage * 0.10f * stacks;
-        controller.playerHealth.Heal(healAmount);
+        float healAmount = stats.attackDamage * 0.10f * stacks;
+        PlayerController.Instance.playerHealth.Heal(healAmount);
     }
 }

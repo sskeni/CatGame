@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 6166030397377138669}
   - component: {fileID: 904586358400151621}
   m_Layer: 5
-  m_Name: InventoryUI
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2010,7 +2010,7 @@ GameObject:
   - component: {fileID: 6076641116969903663}
   - component: {fileID: 1752566114262740077}
   m_Layer: 5
-  m_Name: ItemGivenUI
+  m_Name: ItemGiven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4093,7 +4093,7 @@ GameObject:
   - component: {fileID: 5383846868224394950}
   - component: {fileID: 8207686348024671218}
   m_Layer: 5
-  m_Name: PauseMenu
+  m_Name: Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4636,7 +4636,7 @@ GameObject:
   - component: {fileID: 3570307367551737310}
   - component: {fileID: 2163419409143206488}
   m_Layer: 5
-  m_Name: EnemyCountText
+  m_Name: EnemyCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4773,7 +4773,7 @@ GameObject:
   - component: {fileID: 7953977246813566482}
   - component: {fileID: 3741488436242282191}
   m_Layer: 5
-  m_Name: ToolTipBox
+  m_Name: ToolTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4820,14 +4820,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.67058825}
+  m_Color: {r: 0.7137255, g: 0.3764706, b: 0.4862745, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1819105849, guid: 68f6a8585ac91df44b32743ebd850c4c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4850,6 +4850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 3723334722910503247}
+  positionOffset: 0.1
 --- !u!1 &8401972322385625643
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,7 +5222,7 @@ GameObject:
   - component: {fileID: 3329696189082858216}
   - component: {fileID: 5892787078743044454}
   m_Layer: 5
-  m_Name: RoomClearText
+  m_Name: RoomClear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6365,27 +6366,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6425,11 +6426,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 810
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 493
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 8961907864298322961, guid: 48dcebc6e7b0b8c4db4ee866698a0e2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

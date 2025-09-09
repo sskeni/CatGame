@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartMenu : MonoBehaviour
+public class StartUI : MonoBehaviour
 {
     // Starts the game
     public void StartGame()

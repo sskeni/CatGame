@@ -1,28 +1,20 @@
-using NUnit.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class ItemUIManager : MonoBehaviour
+public class ItemPoolManager : MonoBehaviour
 {
     // Singleton References
-    private static ItemUIManager instance;
-    public static ItemUIManager Instance { get { return instance; } }
-
-    // UI References
-    public List<ItemButton> buttons = new List<ItemButton>();
+    private static ItemPoolManager instance;
+    public static ItemPoolManager Instance { get { return instance; } }
 
     // Private References
     private List<Item> itemPool = new List<Item>();
 
-    private void Start()
+    private void Awake()
     {
         CheckSingleton();
-        CloseUI();
         PopulateItemPool();
     }
 
@@ -72,62 +64,6 @@ public class ItemUIManager : MonoBehaviour
         }
 
         return item;
-
-    }
-
-    // Opens the item select UI
-    public void OpenUI()
-    {
-        PlayerController.Instance.DisablePlayControls();
-        Time.timeScale = 0;
-        this.gameObject.SetActive(true);
-        StartCoroutine(OpenUICoroutine());
-    }
-
-    // Open UI Coroutine
-    private IEnumerator OpenUICoroutine()
-    {
-        AssignRandomItemToButtons();
-
-        yield return new WaitForSecondsRealtime(0.5f);
-        ActivateButtons();
-    }
-
-    // Closes the item select UI
-    public void CloseUI()
-    {
-        Time.timeScale = 1;
-        this.gameObject.SetActive(false);
-        DeactivateButtons();
-        PlayerController.Instance.EnablePlayControls();
-    }
-
-    // Sets buttons to interactable
-    public void ActivateButtons()
-    {
-        foreach (ItemButton button in buttons)
-        {
-            button.gameObject.SetActive(true);
-        }
-    }
-
-    // Sets buttons to uninteractable
-    public void DeactivateButtons()
-    {
-        foreach (ItemButton button in buttons)
-        {
-            button.gameObject.SetActive(false);
-        }
-    }
-
-    // Assigns a random item to each button
-    public void AssignRandomItemToButtons()
-    {
-        foreach (ItemButton button in buttons)
-        {
-            // Assign item
-            button.SetItem(GetItemFromPool());
-        }
     }
 
     // Returns Item type from Enum Items

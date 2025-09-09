@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemButton : MonoBehaviour
+public class ItemButtonUI : MonoBehaviour
 {
     // Item Reference
     public Item item;
