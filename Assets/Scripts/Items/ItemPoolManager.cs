@@ -91,6 +91,8 @@ public class ItemPoolManager : MonoBehaviour
                 return new LuckyDice();
             case Items.VampireFangs:
                 return new VampireFangs();
+            case Items.KungFuTraining:
+                return new KungFuTraining();
             default:
                 return new SharperClaws();
         }
@@ -109,5 +111,6 @@ public enum Items
     LionClaw,
     Slinky,
     LuckyDice,
-    VampireFangs
+    VampireFangs,
+    KungFuTraining
 }

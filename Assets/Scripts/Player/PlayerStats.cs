@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     public float attackCooldown = 1f;
     public float critChance = 10f;
     public float critDamage = 50f;
+    public int maxAttacks = 1;
 
     public float maxHealth = 10f;
     public float regenDelay = 5f;

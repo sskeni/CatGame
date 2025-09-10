@@ -19,7 +19,6 @@ public abstract class Item
     public virtual void OnHit(PlayerStats stats, IDamageable damageable, int stacks) { }
 }
 
-
 // Increases attack
 public class SharperClaws : Item
 {
@@ -30,7 +29,7 @@ public class SharperClaws : Item
 
     public override string GiveDescription()
     {
-        return "Increases attack";
+        return "Increases attack damage";
     }
 
     public override Sprite GiveSprite()
@@ -287,3 +286,31 @@ public class VampireFangs : Item
     }
 }
 
+// Increases max attacks
+public class KungFuTraining : Item
+{
+    public override int maxStack()
+    {
+        return 2;
+    }
+
+    public override string GiveName()
+    {
+        return "Kung Fu Training";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases max attacks. Allows attacking multiple times in a row.";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/TempItemImage");
+    }
+
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
+    {
+        stats.maxAttacks = 1 + stacks;
+    }
+}

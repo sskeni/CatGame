@@ -17,6 +17,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     private float attackCooldownTimer;
     private RaycastHit2D[] attackHits;
     private List<IDamageable> iDamageables = new List<IDamageable>();
+    private int attacks;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class PlayerMeleeAttack : MonoBehaviour
         anim = GetComponent<Animator>();
 
         // Allow attacking at the start
-        attackCooldownTimer = PlayerStats.Instance.attackCooldown;
+        attacks = 1;
 
         // Set Attack Controls
         PlayerController.Instance.controls.Player.Attack.performed += ctx => Attack();
@@ -38,8 +39,10 @@ public class PlayerMeleeAttack : MonoBehaviour
     // Attack all damageables in range
     private void Attack()
     {
-        if (attackCooldownTimer >= PlayerStats.Instance.attackCooldown)
+        if (attacks > 0 && !shouldBeDamaging)
         {
+            attacks--;
+
             // Run animation
             anim.SetTrigger("attack");
 
@@ -131,7 +134,28 @@ public class PlayerMeleeAttack : MonoBehaviour
     // Keeps attack cooldown timer updated
     private void CountCooldownTimer()
     {
-        attackCooldownTimer += Time.deltaTime;
+        if (attacks < PlayerStats.Instance.maxAttacks)
+        {
+            attackCooldownTimer += Time.deltaTime;
+        }
+
+        if (attackCooldownTimer >= PlayerStats.Instance.attackCooldown)
+        {
+            attacks++;
+            attackCooldownTimer = 0f;
+        }
+    }
+
+    // Returns the percentage from 0 to 1 until the attack ready
+    public float GetCooldownPercentage()
+    {
+        return attackCooldownTimer / PlayerStats.Instance.attackCooldown;
+    }
+
+    // Returns the current number of attacks
+    public int GetAttacks()
+    {
+        return attacks;
     }
 
     #region Animation Triggers
