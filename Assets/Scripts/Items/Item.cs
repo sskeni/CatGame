@@ -89,7 +89,7 @@ public class CatFood : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         stats.maxHealth = stats.baseMaxHealth + (1f * stacks);
-        PlayerController.Instance.playerHealth.SetMaxHealth(stats.maxHealth);
+        PlayerController.Instance.health.SetMaxHealth(stats.maxHealth);
     }
 }
 
@@ -283,6 +283,7 @@ public class VampireFangs : Item
     public override void OnHit(PlayerStats stats, IDamageable damageable, int stacks)
     {
         float healAmount = stats.attackDamage * 0.10f * stacks;
-        PlayerController.Instance.playerHealth.Heal(healAmount);
+        PlayerController.Instance.health.Heal(healAmount);
     }
 }
+

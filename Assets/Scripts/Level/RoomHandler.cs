@@ -82,7 +82,7 @@ public class RoomHandler : MonoBehaviour
 
         if(roomsCleared == 9)
         {
-            PlayerController.Instance.playerHealth.Die();
+            PlayerController.Instance.health.Die();
         }
     }
     

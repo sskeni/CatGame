@@ -10,7 +10,7 @@ public class EnemyDamageBox : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerController.Instance.playerHealth.DamageWithKnockback(hitDamage, transform.position);
+            PlayerController.Instance.health.DamageWithKnockback(hitDamage, transform.position);
         }
     }
 }

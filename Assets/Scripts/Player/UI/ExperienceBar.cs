@@ -16,7 +16,7 @@ public class ExperienceBar : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.Instance != null) UpdateExperienceVariables(PlayerController.Instance.playerLevel);
+        if (PlayerController.Instance != null) UpdateExperienceVariables(PlayerController.Instance.level);
     }
 
     // Updates the UI slider and text fields

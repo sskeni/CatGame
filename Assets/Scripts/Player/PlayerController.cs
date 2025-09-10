@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public Animator anim;
-    [HideInInspector] public PlayerHealth playerHealth;
-    [HideInInspector] public PlayerLevel playerLevel;
-    [HideInInspector] public PlayerInventory playerInventory;
-    [HideInInspector] public PlayerMeleeAttack playerAttack;
-    [HideInInspector] public PlayerMovement playerMovement;
+    [HideInInspector] public PlayerHealth health;
+    [HideInInspector] public PlayerLevel level;
+    [HideInInspector] public PlayerInventory inventory;
+    [HideInInspector] public PlayerMeleeAttack attack;
+    [HideInInspector] public PlayerMovement movement;
 
     private void Awake()
     {
@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        playerHealth = GetComponent<PlayerHealth>();
-        playerLevel = GetComponent<PlayerLevel>();
-        playerInventory = GetComponent<PlayerInventory>();
-        playerAttack = GetComponent<PlayerMeleeAttack>();
-        playerMovement = GetComponent<PlayerMovement>();
+        health = GetComponent<PlayerHealth>();
+        level = GetComponent<PlayerLevel>();
+        inventory = GetComponent<PlayerInventory>();
+        attack = GetComponent<PlayerMeleeAttack>();
+        movement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -72,11 +72,11 @@ public class PlayerController : MonoBehaviour
     private void FlipX()
     {
         // Flip based on movement
-        if (playerMovement.move.x > 0) // Moving Right
+        if (movement.move.x > 0) // Moving Right
         {
             sprite.flipX = false;
         }
-        else if (playerMovement.move.x < 0) // Moving Left
+        else if (movement.move.x < 0) // Moving Left
         {
             sprite.flipX = true;
         }
@@ -84,11 +84,11 @@ public class PlayerController : MonoBehaviour
         // Override if attacking
         Vector2 attackDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-        if (playerAttack.shouldBeDamaging && attackDirection.x > 0) // Attacking Right
+        if (attack.shouldBeDamaging && attackDirection.x > 0) // Attacking Right
         {
             sprite.flipX = false;
         }
-        else if (playerAttack.shouldBeDamaging && attackDirection.x < 0) // Attacking Left
+        else if (attack.shouldBeDamaging && attackDirection.x < 0) // Attacking Left
         {
             sprite.flipX = true;
         }
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     // Updates items that operate every specified amount of seconds
     private IEnumerator CallItemUpdate()
     {
-        foreach (ItemList i in playerInventory.items)
+        foreach (ItemList i in inventory.items)
         {
             i.item.Update(this, i.stacks);
         }

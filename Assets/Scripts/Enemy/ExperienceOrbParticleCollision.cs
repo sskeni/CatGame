@@ -37,7 +37,7 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
             particleList[i] = p;
 
             // Give player experience
-            PlayerController.Instance.playerLevel.GiveExperience(experienceAmount / ps.main.maxParticles);
+            PlayerController.Instance.level.GiveExperience(experienceAmount / ps.main.maxParticles);
         }
         // Replace triggered particles in particle system
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, particleList);

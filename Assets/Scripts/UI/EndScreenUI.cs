@@ -57,7 +57,7 @@ public class EndScreenUI : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        levelText.text = "Level " + PlayerController.Instance.playerLevel.level;
+        levelText.text = "Level " + PlayerController.Instance.level.level;
         healthText.text = "Health: " + PlayerStats.Instance.maxHealth;
         healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.regenRate;
         attackText.text = "Attack: " + PlayerStats.Instance.attackDamage;

@@ -58,7 +58,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     public IEnumerator DamageWhileAnimationIsActive()
     {
         shouldBeDamaging = true;
-        PlayerController.Instance.playerHealth.hasTakenDamage = true; // Player is invincible while attacking
+        PlayerController.Instance.health.hasTakenDamage = true; // Player is invincible while attacking
         rb.gravityScale = 1; // Lower gravity while attacking
 
         while (shouldBeDamaging)
@@ -82,7 +82,7 @@ public class PlayerMeleeAttack : MonoBehaviour
                     Tuple<float, bool> damage = CalculateAttackDamage();
 
                     // Items
-                    foreach (ItemList j in PlayerController.Instance.playerInventory.items)
+                    foreach (ItemList j in PlayerController.Instance.inventory.items)
                     {
                         j.item.OnHit(PlayerStats.Instance, iDamageable, j.stacks);
                     }
@@ -96,7 +96,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.playerHealth.hasTakenDamage = false; // Make player attackable again
+        PlayerController.Instance.health.hasTakenDamage = false; // Make player attackable again
         rb.gravityScale = 5f; // Enable gravity again
         ReturnAttackablesToDamageable();
     }

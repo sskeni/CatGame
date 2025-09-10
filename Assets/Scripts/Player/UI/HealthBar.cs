@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.Instance != null) UpdateHealthVariables(PlayerController.Instance.playerHealth);
+        if (PlayerController.Instance != null) UpdateHealthVariables(PlayerController.Instance.health);
     }
 
     // Updates the health bar UI
