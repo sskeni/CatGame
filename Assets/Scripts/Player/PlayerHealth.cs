@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private bool isDying = false;
     public bool canPassivelyRegen = true;
 
-    private void Awake()
+    private void Start()
     {
         currentHealth = PlayerStats.Instance.maxHealth;
     }

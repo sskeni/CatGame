@@ -11,7 +11,7 @@ public class WindUpMouseEnemy: MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     // Private References
-    private GameObject playerRef;
+    private GameObject playerRef = null;
     private float eyeInitialPos;
 
     private void Start()
