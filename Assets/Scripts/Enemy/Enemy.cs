@@ -54,7 +54,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         DamageNumber damageNumber = Instantiate(damageNumberPrefab);
         //damageNumber.transform.position = transform.position;
-        damageNumber.transform.position = new Vector3(transform.position.x + Random.Range(0f, 0.5f), transform.position.y + Random.Range(0f, 0.5f), transform.position.z);
+        float xOffset = Random.Range(0f, 0.5f);
+        float yOffset = Random.Range(0f, 0.5f);
+        damageNumber.transform.position = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z);
         damageNumber.DamageWasCrit(wasCrit);
         damageNumber.SetDamageAmount(damageAmount);
     }

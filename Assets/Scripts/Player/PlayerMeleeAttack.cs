@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMeleeAttack : MonoBehaviour
 {
@@ -84,13 +85,17 @@ public class PlayerMeleeAttack : MonoBehaviour
                 {
                     Tuple<float, bool> damage = CalculateAttackDamage();
 
+                    float damageAmount = damage.Item1;
+
+                    bool wasCrit = damage.Item2;
+
                     // Items
                     foreach (ItemList j in PlayerController.Instance.inventory.items)
                     {
-                        j.item.OnHit(PlayerStats.Instance, iDamageable, j.stacks);
+                        j.item.OnHit(PlayerStats.Instance, iDamageable, damageAmount, j.stacks);
                     }
 
-                    iDamageable.Damage(damage.Item1, damage.Item2); // Sets hasTakenDamage to true
+                    iDamageable.Damage(damageAmount, wasCrit); // Sets hasTakenDamage to true
 
                     iDamageables.Add(iDamageable);
                 }
@@ -118,11 +123,15 @@ public class PlayerMeleeAttack : MonoBehaviour
     // Calculates attack damage
     private Tuple<float, bool> CalculateAttackDamage()
     {
-        float damage = PlayerStats.Instance.attackDamage;
+        float damage = PlayerStats.Instance.attackDamage * PlayerStats.Instance.attackMultiplier;
         bool wasCrit = false;
 
+        float lowerDamageVariance = PlayerStats.Instance.lowerDamageVariance;
+        float upperDamageVariance = PlayerStats.Instance.upperDamageVariance;
+        damage *= Random.Range(lowerDamageVariance, upperDamageVariance);
+
         // Calculate crit
-        if (UnityEngine.Random.Range(1, 101) <= PlayerStats.Instance.critChance)
+        if (Random.Range(0, 100) <= PlayerStats.Instance.critChance)
         {
             damage *= 1 + (PlayerStats.Instance.critDamage / 100);
             wasCrit = true;

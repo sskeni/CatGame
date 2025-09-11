@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private bool isRegeningHealth = false;
     private Coroutine regenCoroutine;
     private bool isDying = false;
+    public bool canPassivelyRegen = true;
 
     private void Awake()
     {
@@ -48,8 +49,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             StartCoroutine(DoDamageAnimation());
 
             // If currently regening, stop
-            if (regenCoroutine != null) StopCoroutine(regenCoroutine);
-            regenCoroutine = StartCoroutine(DoRegeneration());
+            if (regenCoroutine != null)
+            {
+                StopCoroutine(regenCoroutine);
+            }
+            if (canPassivelyRegen)
+            {
+                regenCoroutine = StartCoroutine(DoRegeneration());
+            }
 
             if (currentHealth <= 0) Die();
         }
@@ -80,6 +87,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         damageNumber.SetDamageAmount(damageAmount);
     }
 
+    // Spawns a heal number
+    private void SpawnHealNumber(float healAmount, bool wasCrit) 
+    {
+        DamageNumber damageNumber = Instantiate(damageNumberPrefab);
+        damageNumber.transform.position = transform.position;
+        damageNumber.SetDamageAmount(healAmount);
+        damageNumber.WasHeal(wasCrit);
+    }
+
     // Health regeneration coroutine
     private IEnumerator DoRegeneration()
     {
@@ -87,7 +103,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         isRegeningHealth = true;
         while (isRegeningHealth)
         {
-            isRegeningHealth = Heal(PlayerStats.Instance.regenRate);
+            isRegeningHealth = Heal(PlayerStats.Instance.healthRegen);
             yield return new WaitForSeconds(0.25f);
         }
     }
@@ -96,6 +112,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public bool Heal(float healAmount)
     {
         currentHealth += healAmount;
+
+        SpawnHealNumber(healAmount, false);
+
         if  (currentHealth >= PlayerStats.Instance.maxHealth)
         {
             currentHealth = PlayerStats.Instance.maxHealth;

@@ -7,6 +7,10 @@ public class CoinPickup : MonoBehaviour
 {
     // Public References
     public int coinAmount;
+    public float initialXForce;
+    public float initialYForce;
+    public float initialYForceVariance;
+
     public Rigidbody2D rb;
     public GameObject parentObject;
     public Animator anim;
@@ -17,9 +21,14 @@ public class CoinPickup : MonoBehaviour
     private void Start()
     {
         pickupable = false;
+
         StartCoroutine(DelayPickUpable());
-        Vector2 initialForce = new Vector2(Random.Range(-200, 200), Random.Range(400, 500)); // Random initial movement
+
+        float xForce = Random.Range(-initialXForce, initialXForce);
+        float yForce = Random.Range(initialYForce, initialYForce + initialYForceVariance);
+        Vector2 initialForce = new Vector2(xForce, yForce); // Random initial movement
         rb.AddForce(initialForce);
+
         anim.Play("Bob", -1, Random.Range(0f, 1f)); // Set the animation to a random interval
     }
 

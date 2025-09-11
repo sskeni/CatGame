@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinAmount: 1
+  initialXForce: 200
+  initialYForce: 400
+  initialYForceVariance: 100
   rb: {fileID: 4667505365604658460}
   parentObject: {fileID: 7020237724517999924}
   anim: {fileID: 4243042466408435291}

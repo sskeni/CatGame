@@ -93,6 +93,14 @@ public class ItemPoolManager : MonoBehaviour
                 return new VampireFangs();
             case Items.KungFuTraining:
                 return new KungFuTraining();
+            case Items.Mirror:
+                return new Mirror();
+            case Items.BloodThirst:
+                return new BloodThirst();
+            case Items.FuzzyDice:
+                return new FuzzyDice();
+            case Items.MetalClaws:
+                return new MetalClaws();
             default:
                 return new SharperClaws();
         }
@@ -112,5 +120,9 @@ public enum Items
     Slinky,
     LuckyDice,
     VampireFangs,
-    KungFuTraining
+    KungFuTraining,
+    Mirror,
+    BloodThirst,
+    FuzzyDice,
+    MetalClaws
 }

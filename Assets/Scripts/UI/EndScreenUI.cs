@@ -59,7 +59,7 @@ public class EndScreenUI : MonoBehaviour
 
         levelText.text = "Level " + PlayerController.Instance.level.level;
         healthText.text = "Health: " + PlayerStats.Instance.maxHealth;
-        healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.regenRate;
+        healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.healthRegen;
         attackText.text = "Attack: " + PlayerStats.Instance.attackDamage;
         critRateText.text = "Critical Rate: " + PlayerStats.Instance.critChance + "%";
         critDamageText.text = "Critical Damage: " + PlayerStats.Instance.critDamage + "%";

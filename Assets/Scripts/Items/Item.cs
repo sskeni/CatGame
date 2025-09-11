@@ -10,13 +10,16 @@ public abstract class Item
 
     public abstract string GiveDescription();
 
-    public abstract Sprite GiveSprite();
+    public virtual Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/TempItemImage");
+    }
 
     public virtual void Update(PlayerController controller, int stacks) { }
 
     public virtual void AddPlayerStats(PlayerStats stats, int stacks) { }
 
-    public virtual void OnHit(PlayerStats stats, IDamageable damageable, int stacks) { }
+    public virtual void OnHit(PlayerStats stats, IDamageable damageable, float damage, int stacks) { }
 }
 
 // Increases attack
@@ -39,7 +42,8 @@ public class SharperClaws : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.attackDamage = stats.baseAttackDamage + (0.25f * stacks);
+        float modifier = 0.25f * stacks;
+        stats.AddAttack(GiveName(), modifier);
     }
 }
 
@@ -63,7 +67,8 @@ public class CatNip : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.speed = stats.baseSpeed + (5f * stacks);
+        float modifier = 5f * stacks;
+        stats.AddMoveSpeed(GiveName(), modifier);
     }
 }
 
@@ -87,8 +92,8 @@ public class CatFood : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.maxHealth = stats.baseMaxHealth + (1f * stacks);
-        PlayerController.Instance.health.SetMaxHealth(stats.maxHealth);
+        float modifier = 1f * stacks;
+        stats.AddMaxHealth(GiveName(), modifier);
     }
 }
 
@@ -112,7 +117,8 @@ public class CatTreat : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.regenRate = stats.baseRegenRate + (0.5f * stacks);
+        float modifier = 0.5f * stacks;
+        stats.AddHealthRegen(GiveName(), modifier);
     }
 }
 
@@ -141,7 +147,8 @@ public class Milk : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.attackCooldown = stats.baseAttackCooldown - (stats.baseAttackCooldown * 0.1f  * stacks);
+        float modifier = 0.1f  * stacks;
+        stats.AddAttackCooldownReduction(GiveName(), modifier);
     }
 }
 
@@ -170,7 +177,8 @@ public class LionMane : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.critChance = stats.baseCritChance + (15f * stacks);
+        float modifier = 15f * stacks;
+        stats.AddCritChange(GiveName(), modifier);
     }
 }
 
@@ -194,7 +202,8 @@ public class LionClaw : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.critDamage = stats.baseCritDamage + (25f * stacks);
+        float modifier = 25f * stacks;
+        stats.AddCritDamage(GiveName(), modifier);
     }
 }
 
@@ -218,7 +227,8 @@ public class Slinky : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.maxJumps = 1 + stacks;
+        float modifier = stacks;
+        stats.AddMaxJump(GiveName(), modifier);
     }
 }
 
@@ -245,13 +255,13 @@ public class LuckyDice : Item
         return Resources.Load<Sprite>("Item Images/LuckyDice");
     }
 
-    public override void OnHit(PlayerStats stats, IDamageable damageable, int stacks)
+    public override void OnHit(PlayerStats stats, IDamageable damageable, float damage, int stacks)
     {
         int procChance = 5 * stacks;
 
         if (Random.Range(1, 101) <= procChance)
         {
-            damageable.Damage(stats.attackDamage, false);
+            damageable.Damage(damage, false);
         }
     }
 }
@@ -279,10 +289,23 @@ public class VampireFangs : Item
         return Resources.Load<Sprite>("Item Images/VampireFangs");
     }
 
-    public override void OnHit(PlayerStats stats, IDamageable damageable, int stacks)
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        float healAmount = stats.attackDamage * 0.10f * stacks;
-        PlayerController.Instance.health.Heal(healAmount);
+        float modifier = 0.1f * stacks;
+        stats.AddLifesteal(GiveName(), modifier);
+    }
+
+    public override void OnHit(PlayerStats stats, IDamageable damageable, float damage, int stacks)
+    {
+        float healAmount = damage * stats.lifesteal * stats.lifestealMultiplier;
+        if (!stats.lifestealDoesDamage)
+        {
+            PlayerController.Instance.health.Heal(healAmount);
+        }
+        else
+        {
+            damageable.Damage(healAmount, false);
+        }
     }
 }
 
@@ -304,13 +327,106 @@ public class KungFuTraining : Item
         return "Increases max attacks. Allows attacking multiple times in a row.";
     }
 
-    public override Sprite GiveSprite()
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        return Resources.Load<Sprite>("Item Images/TempItemImage");
+        float modifier = stacks;
+        stats.AddMaxAttack(GiveName(), modifier);
+    }
+}
+
+// Lifesteal does damage
+public class Mirror : Item
+{
+    public override int maxStack()
+    {
+        return 1;
+    }
+
+    public override string GiveName()
+    {
+        return "Mirror";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Lifesteal does damage instead";
     }
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        stats.maxAttacks = 1 + stacks;
+        stats.lifestealDoesDamage = true;
+    }
+}
+
+// Doubles lifesteal effect, but can no longer passively regen health
+public class BloodThirst : Item
+{
+    public override int maxStack()
+    {
+        return 1;
+    }
+
+    public override string GiveName()
+    {
+        return "Blood Thirst";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Lifesteal effect is doubled, but can no longer passively regen health";
+    }
+
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
+    {
+        float modifier = stacks;
+        stats.AddLifestealMultiplier(GiveName(), modifier);
+        PlayerController.Instance.health.canPassivelyRegen = false;
+    }
+}
+
+// All attacks now do a random amount of damage from 75% to 150%
+public class FuzzyDice : Item
+{
+    public override int maxStack()
+    {
+        return 1;
+    }
+
+    public override string GiveName()
+    {
+        return "Fuzzy Dice";
+    }
+
+    public override string GiveDescription()
+    {
+        return "All damage now does a random amount of damage from 75% to 150%";
+    }
+
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
+    {
+        float lower = 0.25f;
+        float upper = 0.5f;
+        stats.AddLowerAttackVariance(GiveName(), lower);
+        stats.AddUpperAttackVariance(GiveName(), upper);
+    }
+}
+
+// Increases attack damage multiplier
+public class MetalClaws : Item
+{
+    public override string GiveName()
+    {
+        return "Metal Claws";
+    }
+
+    public override string GiveDescription()
+    {
+        return "Increases attack damage multiplier";
+    }
+
+    public override void AddPlayerStats(PlayerStats stats, int stacks)
+    {
+        float modifier = stacks * 0.10f;
+        stats.AddAttackMultiplier(GiveName(), modifier);
     }
 }

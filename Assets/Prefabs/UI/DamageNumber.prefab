@@ -255,6 +255,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1970978981267069968}
   fadeSpeed: 0.005
+  critColor: {r: 0.65882355, g: 0.24705882, b: 0.28235295, a: 1}
+  healColor: {r: 0.43529412, g: 0.5921569, b: 0.36862746, a: 1}
+  initialForce: 200
+  initialYForceVariance: 100
 --- !u!50 &3875564790869446348
 Rigidbody2D:
   serializedVersion: 5

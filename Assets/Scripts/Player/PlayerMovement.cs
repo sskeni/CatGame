@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Private Variables
     public Vector2 move;
-    private int jumpsLeft;
+    public int jumpsLeft;
     private PlatformEffector2D currentOneWayPlatform;
     private Rigidbody2D rb;
     private Animator anim;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         // Apply movement
-        Vector2 movement = new Vector2(move.x, 0.0f) * PlayerStats.Instance.speed;
+        Vector2 movement = new Vector2(move.x, 0.0f) * PlayerStats.Instance.moveSpeed;
         rb.AddForce(movement);
 
         // Set animation

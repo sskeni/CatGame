@@ -820,12 +820,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   sprite: {fileID: 0}
-  playerLevel: {fileID: 0}
-  playerHealth: {fileID: 0}
-  playerInventory: {fileID: 0}
-  playerAttack: {fileID: 0}
-  playerMovement: {fileID: 0}
   anim: {fileID: 0}
+  health: {fileID: 0}
+  level: {fileID: 0}
+  inventory: {fileID: 0}
+  attack: {fileID: 0}
+  movement: {fileID: 0}
 --- !u!114 &1686755250312063052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,6 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
+  canPassivelyRegen: 1
 --- !u!114 &6471252631197897863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,8 +931,11 @@ MonoBehaviour:
   attackCooldown: 1
   critChance: 10
   critDamage: 50
+  maxAttacks: 1
   maxHealth: 5
   regenDelay: 5
   regenRate: 1
   damageIFrames: 1.5
   knockbackVelocity: 15
+  lifestealDoesDamage: 0
+  lifestealMultiplier: 1
