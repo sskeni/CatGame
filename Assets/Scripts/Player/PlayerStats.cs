@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour
     private List<StatChange> moveSpeedChange = new List<StatChange>();
     private List<StatChange> maxJumpChange = new List<StatChange>();
 
-    private List<StatChange> attackChange = new List<StatChange>();
+    private List<StatChange> attackDamageChange = new List<StatChange>();
     private List<StatChange> attackMultiplierChange = new List<StatChange>();
     private List<StatChange> attackCooldownChange = new List<StatChange>();
     private List<StatChange> critChanceChange = new List<StatChange>();
@@ -97,116 +97,73 @@ public class PlayerStats : MonoBehaviour
         baseLifestealMultiplier = lifestealMultiplier;
     }
 
-    // Adds a move speed stat modifier
-    public void AddMoveSpeed(string name, float modifier)
+    public void AddStat(string name, float modifier, Stat statType)
     {
-        AddStatChange(moveSpeedChange, name, modifier);
-        moveSpeed = RecalculateStatAdditive(baseMoveSpeed, moveSpeedChange);
+        switch (statType)
+        {
+            case Stat.MoveSpeed:
+                moveSpeed = ChangeStat(baseMoveSpeed, moveSpeedChange, name, modifier);
+                break;
+            case Stat.MaxJumps:
+                maxJumps = ChangeStat(baseMaxJumps, maxJumpChange, name, modifier);
+                break;
+            case Stat.AttackDamage:
+                attackDamage = ChangeStat(baseAttackDamage, attackDamageChange, name, modifier);
+                break;
+            case Stat.AttackMultiplier:
+                attackMultiplier = ChangeStat(baseAttackMultiplier, attackMultiplierChange, name, modifier);
+                break;
+            case Stat.AttackCooldown:
+                attackCooldown = ChangeStat(baseAttackCooldown, attackCooldownChange, name, modifier);
+                break;
+            case Stat.CritChance:
+                critChance = ChangeStat(baseCritChance, critChanceChange, name, modifier);
+                break;
+            case Stat.CritDamage:
+                critDamage = ChangeStat(baseCritDamage, critDamageChange, name, modifier);
+                break;
+            case Stat.LowerDamageVariance:
+                lowerDamageVariance = ChangeStat(baseLowerDamageVariance, lowerDamageVarianceChange, name, modifier);
+                break;
+            case Stat.UpperDamageVariance:
+                upperDamageVariance = ChangeStat(baseUpperDamageVariance, upperDamageVarianceChange, name, modifier);
+                break;
+            case Stat.MaxAttacks:
+                maxAttacks = ChangeStat(baseMaxAttacks, maxAttackChange, name, modifier);
+                break;
+            case Stat.MaxHealth:
+                maxHealth = ChangeStat(baseMaxHealth, maxHealthChange, name, modifier);
+                break;
+            case Stat.HealthRegen:
+                healthRegen = ChangeStat(baseHealthRegen, healthRegenChange, name, modifier);
+                break;
+            case Stat.Lifesteal:
+                lifesteal = ChangeStat(baseLifesteal, lifestealChange, name, modifier);
+                break;
+            case Stat.LifestealMultiplier:
+                lifestealMultiplier = ChangeStat(baseLifestealMultiplier, lifestealMultiplierChange, name, modifier);
+                break;
+            default:
+                break;
+        }
     }
 
-    // Adds a max jump stat modifier
-    public void AddMaxJump(string name, float modifier)
+    // Creates and adds a new StatIncrease and returns the calculated final stat
+    private float ChangeStat(float baseStat, List<StatChange> statChanges, string name, float modifier)
     {
-        AddStatChange(maxJumpChange, name, modifier);
-        maxJumps = (int)RecalculateStatAdditive(baseMaxJumps, maxJumpChange);
-        PlayerController.Instance.movement.jumpsLeft = maxJumps;
+        AddStatChange(statChanges, name, modifier);
+        return RecalculateStat(baseStat, statChanges);
     }
-
-
-
-    // Adds an attack stat modifier
-    public void AddAttack(string name, float modifier)
+    private int ChangeStat(int baseStat, List<StatChange> statChanges, string name, float modifier)
     {
-        AddStatChange(attackChange, name, modifier);
-        attackDamage = RecalculateStatAdditive(baseAttackDamage, attackChange);
-    }
-
-    // Adds an attack multiplier stat modifier
-    public void AddAttackMultiplier(string name, float modifier)
-    {
-        AddStatChange(attackMultiplierChange, name, modifier);
-        attackMultiplier = RecalculateStatAdditive(baseAttackMultiplier, attackMultiplierChange);
-    }
-
-    // Adds an attack cooldown stat modifier
-    public void AddAttackCooldownReduction(string name, float modifier)
-    {
-        AddStatChange(attackCooldownChange, name, modifier);
-        attackCooldown = RecalculateStatSubtractive(baseAttackCooldown, attackCooldownChange);
-    }
-
-    // Adds a crit chance stat modifier
-    public void AddCritChange(string name, float modifier)
-    {
-        AddStatChange(critChanceChange, name, modifier);
-        critChance = RecalculateStatAdditive(baseCritChance, critChanceChange);
-    }
-
-    // Adds a crit damage stat modifier
-    public void AddCritDamage(string name, float modifier)
-    {
-        AddStatChange(critDamageChange, name, modifier);
-        critDamage = RecalculateStatAdditive(baseCritDamage, critDamageChange);
-    }
-
-    // Adds a lower attack variance stat modifier
-    public void AddLowerAttackVariance(string name, float modifier)
-    {
-        AddStatChange(upperDamageVarianceChange, name, modifier);
-        lowerDamageVariance = RecalculateStatSubtractive(baseLowerDamageVariance, upperDamageVarianceChange);
-    }
-
-    // Adds an upper attack variance stat modifier
-    public void AddUpperAttackVariance(string name, float modifier)
-    {
-        AddStatChange(lowerDamageVarianceChange, name, modifier);
-        upperDamageVariance = RecalculateStatAdditive(baseUpperDamageVariance, upperDamageVarianceChange);
-    }
-
-    // Adds a max attack stat modifier
-    public void AddMaxAttack(string name, float modifier)
-    {
-        AddStatChange(maxAttackChange, name, modifier);
-        maxAttacks = (int)RecalculateStatAdditive(baseMaxAttacks, maxAttackChange);
-    }
-
-
-
-    // Adds a max health stat modifier
-    public void AddMaxHealth(string name, float modifier)
-    {
-        AddStatChange(maxHealthChange, name, modifier);
-        maxHealth = RecalculateStatAdditive(baseMaxHealth, maxHealthChange);
-        PlayerController.Instance.health.SetMaxHealth(maxHealth);
-    }
-
-    // Adds a heath regen stat modifier
-    public void AddHealthRegen(string name, float modifier)
-    {
-        AddStatChange(healthRegenChange, name, modifier);
-        healthRegen = RecalculateStatAdditive(baseHealthRegen, healthRegenChange);
-    }
-
-
-
-    // Adds a lifesteal multiplier stat modifier
-    public void AddLifesteal(string name, float modifier)
-    {
-        AddStatChange(lifestealChange, name, modifier);
-        lifesteal = RecalculateStatAdditive(baseLifesteal, lifestealChange);
-    }
-
-    // Adds a lifesteal multiplier stat modifier
-    public void AddLifestealMultiplier(string name, float modifier)
-    {
-        AddStatChange(lifestealMultiplierChange, name, modifier);
-        lifestealMultiplier = RecalculateStatAdditive(baseLifestealMultiplier, lifestealMultiplierChange);
+        AddStatChange(statChanges, name, modifier);
+        return (int)RecalculateStat(baseStat, statChanges);
     }
 
     // Adds a StatIncrease to a given list by trying to find and modify an existing one, creating a new one if one is not found
-    private void AddStatChange(List<StatChange> list, string name, float modifier)
+    private void AddStatChange(List<StatChange> statChanges, string name, float modifier)
     {
-        foreach (StatChange stat in list)
+        foreach (StatChange stat in statChanges)
         {
             if (name == stat.name)
             {
@@ -215,27 +172,25 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        list.Add(new StatChange(name, modifier));
+        statChanges.Add(new StatChange(name, modifier));
     }
 
     // Recalculates a stat by adding all the StatIncreases in a list to the base stat
-    private float RecalculateStatAdditive(float baseStat, List<StatChange> list)
+    private float RecalculateStat(float baseStat, List<StatChange> statChanges)
     {
         float finalStat = baseStat;
-        foreach (StatChange statIncrease in list)
+        foreach (StatChange statIncrease in statChanges)
         {
             finalStat += statIncrease.modifier;
         }
         return finalStat;
     }
-
-    // Recalculates a stat by subtracting all the StatIncreases in a list to the base stat
-    private float RecalculateStatSubtractive(float baseStat, List<StatChange> list)
+    private int RecalculateStat(int baseStat, List<StatChange> statChanges)
     {
-        float finalStat = baseStat;
-        foreach (StatChange statIncrease in list)
+        int finalStat = baseStat;
+        foreach (StatChange statIncrease in statChanges)
         {
-            finalStat -= statIncrease.modifier;
+            finalStat += (int)statIncrease.modifier;
         }
         return finalStat;
     }
@@ -264,4 +219,25 @@ public class StatChange
         name = _name;
         modifier = _modifier;
     }
+}
+
+public enum Stat
+{
+    MoveSpeed,
+    JumpForce,
+    MaxJumps,
+    AttackDamage,
+    AttackMultiplier,
+    AttackCooldown,
+    CritChance,
+    CritDamage,
+    LowerDamageVariance,
+    UpperDamageVariance,
+    MaxAttacks,
+    MaxHealth,
+    HealthRegen,
+    DamageIFrames,
+    KnockbackVelocity,
+    Lifesteal,
+    LifestealMultiplier
 }

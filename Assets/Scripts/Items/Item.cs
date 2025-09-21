@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public abstract class Item
@@ -43,7 +43,7 @@ public class SharperClaws : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 0.25f * stacks;
-        stats.AddAttack(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.AttackDamage);
     }
 }
 
@@ -68,7 +68,7 @@ public class CatNip : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 5f * stacks;
-        stats.AddMoveSpeed(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.MoveSpeed);
     }
 }
 
@@ -93,7 +93,7 @@ public class CatFood : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 1f * stacks;
-        stats.AddMaxHealth(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.MaxHealth);
     }
 }
 
@@ -118,7 +118,7 @@ public class CatTreat : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 0.5f * stacks;
-        stats.AddHealthRegen(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.HealthRegen);
     }
 }
 
@@ -147,8 +147,8 @@ public class Milk : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        float modifier = 0.1f  * stacks;
-        stats.AddAttackCooldownReduction(GiveName(), modifier);
+        float modifier = -0.1f  * stacks;
+        stats.AddStat(GiveName(), modifier, Stat.AttackCooldown);
     }
 }
 
@@ -178,7 +178,7 @@ public class LionMane : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 15f * stacks;
-        stats.AddCritChange(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.CritChance);
     }
 }
 
@@ -203,7 +203,7 @@ public class LionClaw : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 25f * stacks;
-        stats.AddCritDamage(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.CritDamage);
     }
 }
 
@@ -228,7 +228,8 @@ public class Slinky : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = stacks;
-        stats.AddMaxJump(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.MaxJumps);
+        PlayerController.Instance.movement.jumpsLeft = stats.maxJumps;
     }
 }
 
@@ -292,7 +293,7 @@ public class VampireFangs : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = 0.1f * stacks;
-        stats.AddLifesteal(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.Lifesteal);
     }
 
     public override void OnHit(PlayerStats stats, IDamageable damageable, float damage, int stacks)
@@ -330,7 +331,7 @@ public class KungFuTraining : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = stacks;
-        stats.AddMaxAttack(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.MaxAttacks);
     }
 }
 
@@ -379,7 +380,7 @@ public class BloodThirst : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = stacks;
-        stats.AddLifestealMultiplier(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.LifestealMultiplier);
         PlayerController.Instance.health.canPassivelyRegen = false;
     }
 }
@@ -404,10 +405,10 @@ public class FuzzyDice : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        float lower = 0.25f;
+        float lower = -0.25f;
         float upper = 0.5f;
-        stats.AddLowerAttackVariance(GiveName(), lower);
-        stats.AddUpperAttackVariance(GiveName(), upper);
+        stats.AddStat(GiveName(), lower, Stat.LowerDamageVariance);
+        stats.AddStat(GiveName(), upper, Stat.UpperDamageVariance);
     }
 }
 
@@ -427,6 +428,6 @@ public class MetalClaws : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = stacks * 0.10f;
-        stats.AddAttackMultiplier(GiveName(), modifier);
+        stats.AddStat(GiveName(), modifier, Stat.AttackMultiplier);
     }
 }
