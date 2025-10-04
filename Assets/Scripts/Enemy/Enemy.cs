@@ -1,3 +1,4 @@
+using FirstGearGames.SmoothCameraShaker;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private DamageNumber damageNumberPrefab;
     [SerializeField] private GameObject experienceOrbParticleSystemPrefab;
     [SerializeField] private GameObject coinPrefab;
+    public ShakeData critShake;
 
     // Damage References
     public float currentHealth { get; private set; }
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable
         SpawnDamageNumber(damageAmount, wasCrit);
         healthBar.SetCurrentHealth(currentHealth);
 
+        if (wasCrit) CameraShakerHandler.Shake(critShake);
         if (currentHealth <= 0) Die();
     }
 

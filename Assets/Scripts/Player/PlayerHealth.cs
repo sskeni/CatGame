@@ -1,3 +1,4 @@
+using FirstGearGames.SmoothCameraShaker;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -6,14 +7,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     // Prefab References
     [SerializeField] private DamageNumber damageNumberPrefab;
+    public ShakeData damageShakeData;
 
     // Damage Variables
     public float currentHealth { get; private set; }
     public bool hasTakenDamage { get; set; }
+    public bool canPassivelyRegen = true;
+
     private bool isRegeningHealth = false;
     private Coroutine regenCoroutine;
     private bool isDying = false;
-    public bool canPassivelyRegen = true;
 
     private void Start()
     {
@@ -47,6 +50,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             currentHealth -= damageAmount;
             SpawnDamageNumber(damageAmount);
             StartCoroutine(DoDamageAnimation());
+            CameraShakerHandler.Shake(damageShakeData);
 
             // If currently regening, stop
             if (regenCoroutine != null)
