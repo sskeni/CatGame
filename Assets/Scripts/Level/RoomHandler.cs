@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class RoomHandler : MonoBehaviour
@@ -23,8 +24,6 @@ public class RoomHandler : MonoBehaviour
     
     // Public References
     [HideInInspector] public int roomsCleared;
-    [HideInInspector] public int enemiesKilled;
-    [HideInInspector] public int chestsOpened;
 
     // Private References
     private int[,] enemyCount = new int[3, 3];
@@ -58,7 +57,7 @@ public class RoomHandler : MonoBehaviour
     public void LowerEnemyCount(int x, int y)
     {
         enemyCount[x, y]--;
-        enemiesKilled++;
+        RunStatisticsHandler.Instance.totalEnemiesKilled++;
 
         if (enemyCount[x, y] == 0)
         {
@@ -76,16 +75,27 @@ public class RoomHandler : MonoBehaviour
         DifficultyHandler.Instance.difficulty += roomDifficultyIncrease;
 
         roomsCleared++;
+        RunStatisticsHandler.Instance.totalRoomsCleared++;
         roomClearText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         roomClearText.gameObject.SetActive(false);
 
         if(roomsCleared == 9)
         {
-            PlayerController.Instance.health.Die();
+            ReloadRooms();
         }
     }
-    
+
+    // Sets difficulty and reloads the current scene to get a new set of levels
+    // Context menu for debugging purposes
+    [ContextMenu("Reload Rooms")]
+    private void ReloadRooms()
+    {
+        RunStatisticsHandler.Instance.totalHousesCleared++;
+        DifficultyHandler.Instance.difficulty = Mathf.Ceil(DifficultyHandler.Instance.difficulty);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     // Spawns a random amount of coins on room clear
     private IEnumerator SpawnCoins()
     {

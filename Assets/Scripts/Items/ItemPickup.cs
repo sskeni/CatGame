@@ -14,7 +14,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController.Instance.inventory.AddItem(item);
+            PlayerInventory.Instance.AddItem(item);
             Destroy(this.gameObject);
         }
     }

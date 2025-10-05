@@ -58,7 +58,7 @@ public class InventoryUI : MonoBehaviour
         CreateItemUI(itemList, itemUIs.Count);
     }
 
-    // Updates stack count of an item
+    // Updates stack count of an item, adds one if none exists
     public void UpdateItemUIStack(ItemList itemList)
     {
         foreach (GameObject item in itemUIs)
@@ -67,8 +67,10 @@ public class InventoryUI : MonoBehaviour
             if (itemList.item.GiveName() == itemUI.itemList.item.GiveName())
             {
                 itemUI.UpdateStackCount(itemList.stacks);
+                return;
             }
         }
+        AddItemUI(itemList);
     }
 
     // Creates a new ItemUI with a given item

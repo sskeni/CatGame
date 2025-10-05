@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public Animator anim;
     [HideInInspector] public PlayerHealth health;
-    [HideInInspector] public PlayerLevel level;
-    [HideInInspector] public PlayerInventory inventory;
     [HideInInspector] public PlayerMeleeAttack attack;
     [HideInInspector] public PlayerMovement movement;
 
@@ -28,10 +26,11 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         health = GetComponent<PlayerHealth>();
-        level = GetComponent<PlayerLevel>();
-        inventory = GetComponent<PlayerInventory>();
         attack = GetComponent<PlayerMeleeAttack>();
         movement = GetComponent<PlayerMovement>();
+
+        EnablePlayControls();
+        DisableUIControls();
     }
 
     private void Start()
@@ -53,6 +52,11 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         controls.Player.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        controls.Dispose();
     }
 
     // Set up Singleton
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
     // Updates items that operate every specified amount of seconds
     private IEnumerator CallItemUpdate()
     {
-        foreach (ItemList i in inventory.items)
+        foreach (ItemList i in PlayerInventory.Instance.items)
         {
             i.item.Update(this, i.stacks);
         }

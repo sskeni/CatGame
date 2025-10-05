@@ -56,13 +56,13 @@ public class ItemChest : Interactable
 
             // Give a random item from the item pool
             Item ItemToGive = ItemPoolManager.Instance.GetItemFromPool();
-            PlayerController.Instance.inventory.AddItem(ItemToGive);
+            PlayerInventory.Instance.AddItem(ItemToGive);
 
             ItemGivenUI.Instance.SetItem(ItemToGive);
             ItemGivenUI.Instance.OpenUI();
 
             // Keep track of chest count
-            RoomHandler.Instance.chestsOpened++;
+            RunStatisticsHandler.Instance.totalChestsOpened++;
 
             bought = true;
             uiPrompt.SetActive(false);

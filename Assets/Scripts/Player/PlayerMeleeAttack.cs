@@ -90,7 +90,7 @@ public class PlayerMeleeAttack : MonoBehaviour
                     bool wasCrit = damage.Item2;
 
                     // Items
-                    foreach (ItemList j in PlayerController.Instance.inventory.items)
+                    foreach (ItemList j in PlayerInventory.Instance.items)
                     {
                         j.item.OnHit(PlayerStats.Instance, iDamageable, damageAmount, j.stacks);
                     }

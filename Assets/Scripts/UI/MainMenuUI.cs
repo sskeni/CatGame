@@ -2,8 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartUI : MonoBehaviour
+public class MainMenuUI : MonoBehaviour
 {
+    private void Start()
+    {
+        if (PersistentObjectCleaner.Instance != null) PersistentObjectCleaner.Instance.CleanObjects();
+    }
+
     // Starts the game
     public void StartGame()
     {

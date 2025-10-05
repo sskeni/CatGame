@@ -30,6 +30,6 @@ public class ItemButtonUI : MonoBehaviour
     // Gives the player the item set to this button
     public void GiveItem()
     {
-        PlayerController.Instance.inventory.AddItem(item);
+        PlayerInventory.Instance.AddItem(item);
     }
 }

@@ -7,8 +7,7 @@ public class PlayerCoins : MonoBehaviour
     public static PlayerCoins Instance { get { return instance; } }
 
     // Private References
-    private int coins;
-    private int totalCoinsCollected;
+    [SerializeField] private int coins;
 
     private void Awake()
     {
@@ -25,6 +24,7 @@ public class PlayerCoins : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -32,7 +32,7 @@ public class PlayerCoins : MonoBehaviour
     public void AddCoins(int coinsToAdd)
     {
         coins += coinsToAdd;
-        totalCoinsCollected += coinsToAdd;
+        RunStatisticsHandler.Instance.totalCoinsCollected += coinsToAdd;
     }
 
     // Removes coins
@@ -45,11 +45,5 @@ public class PlayerCoins : MonoBehaviour
     public int CoinCount()
     {
         return coins;
-    }
-
-    // Returns total number of coins collected
-    public int TotalCoinCount()
-    {
-        return totalCoinsCollected;
     }
 }

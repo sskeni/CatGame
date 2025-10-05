@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
+    private static PlayerLevel instance;
+    public static PlayerLevel Instance { get { return instance; } }
 
     // Variables
     [SerializeField] private float initialLevelUpExperience;
@@ -12,7 +14,22 @@ public class PlayerLevel : MonoBehaviour
 
     private void Awake()
     {
+        CheckSingleton();
         levelUpExperience = initialLevelUpExperience;
+    }
+    
+    // Set up singleton
+    private void CheckSingleton()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     // Gives player set experience

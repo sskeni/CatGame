@@ -12,7 +12,7 @@ public class DifficultyHandler : MonoBehaviour
         CheckSingleton();
     }
 
-    // Set up Singleton
+    // Set up Singleton and don't destroy on load
     private void CheckSingleton()
     {
         if (instance != null && instance != this)
@@ -22,6 +22,7 @@ public class DifficultyHandler : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 }

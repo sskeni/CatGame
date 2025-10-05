@@ -52,7 +52,7 @@ public class ItemPoolManager : MonoBehaviour
         if (item.maxStack() != -1)
         {
             // Check if player item stack is less than max stack
-            if (PlayerController.Instance.inventory.GetStack(item) < item.maxStack())
+            if (PlayerInventory.Instance.GetStack(item) < item.maxStack())
             {
                 return item;
             }

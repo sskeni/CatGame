@@ -18,6 +18,7 @@ public class EndScreenUI : MonoBehaviour
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI critRateText;
     public TextMeshProUGUI critDamageText;
+    public TextMeshProUGUI housesClearedText;
     public TextMeshProUGUI roomsClearedText;
     public TextMeshProUGUI enemiesKilledText;
     public TextMeshProUGUI coinCountText;
@@ -52,28 +53,31 @@ public class EndScreenUI : MonoBehaviour
         // Format time
         float timeStopped = Time.time;
         float totalTimeInSeconds = timeStopped - timeStarted;
+        float hours = TimeSpan.FromSeconds(totalTimeInSeconds).Hours;
         float minutes = TimeSpan.FromSeconds(totalTimeInSeconds).Minutes;
         float seconds = TimeSpan.FromSeconds(totalTimeInSeconds).Seconds;
 
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
 
-        levelText.text = "Level " + PlayerController.Instance.level.level;
+        levelText.text = "Level " + PlayerLevel.Instance.level;
         healthText.text = "Health: " + PlayerStats.Instance.maxHealth;
         healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.healthRegen;
         attackText.text = "Attack: " + PlayerStats.Instance.attackDamage;
         critRateText.text = "Critical Rate: " + PlayerStats.Instance.critChance + "%";
         critDamageText.text = "Critical Damage: " + PlayerStats.Instance.critDamage + "%";
 
-        roomsClearedText.text = "Rooms Cleared: " + RoomHandler.Instance.roomsCleared;
-        enemiesKilledText.text = "Enemies Killed: " + RoomHandler.Instance.enemiesKilled;
-        coinCountText.text = "x " + PlayerCoins.Instance.TotalCoinCount();
-        chestCountText.text = "x " + RoomHandler.Instance.chestsOpened;
+        housesClearedText.text = "Houses Cleared: " + RunStatisticsHandler.Instance.totalHousesCleared;
+        roomsClearedText.text = "Rooms Cleared: " + RunStatisticsHandler.Instance.totalRoomsCleared;
+        enemiesKilledText.text = "Enemies Killed: " + RunStatisticsHandler.Instance.totalEnemiesKilled;
+        coinCountText.text = "x " + RunStatisticsHandler.Instance.totalCoinsCollected;
+        chestCountText.text = "x " + RunStatisticsHandler.Instance.totalChestsOpened;
         gameObject.SetActive(true);
     }
 
     // Restarts the game
     public void Restart()
     {
+        PersistentObjectCleaner.Instance.CleanObjects();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
