@@ -11,10 +11,17 @@ public class RunStatisticsHandler : MonoBehaviour
     public int totalEnemiesKilled;
     public int totalChestsOpened;
     public int totalHousesCleared;
+    public float runStartTime;
 
     private void Awake()
     {
         CheckSingleton();
+    }
+
+    private void Start()
+    {
+        runStartTime = Time.time;
+        print("Time Started: " + runStartTime);
     }
 
     // Set up singleton

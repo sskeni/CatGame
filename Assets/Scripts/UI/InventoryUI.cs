@@ -86,6 +86,10 @@ public class InventoryUI : MonoBehaviour
 
         ItemUI itemUI = itemObject.GetComponent<ItemUI>();
         itemUI.SetItem(itemList);
+        if (itemList.stacks > 1)
+        {
+            itemUI.UpdateStackCount(itemList.stacks);
+        }
 
         itemUIs.Add(itemObject);
     }

@@ -94,6 +94,7 @@ public class CatFood : Item
     {
         float modifier = 1f * stacks;
         stats.AddStat(GiveName(), modifier, Stat.MaxHealth);
+        PlayerController.Instance.health.FullyHeal();
     }
 }
 

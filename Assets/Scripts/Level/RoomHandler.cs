@@ -82,14 +82,15 @@ public class RoomHandler : MonoBehaviour
 
         if(roomsCleared == 9)
         {
-            ReloadRooms();
+            //ReloadRooms();
+            CountdownUI.Instance.OpenUI();
         }
     }
 
     // Sets difficulty and reloads the current scene to get a new set of levels
     // Context menu for debugging purposes
     [ContextMenu("Reload Rooms")]
-    private void ReloadRooms()
+    public void ReloadRooms()
     {
         RunStatisticsHandler.Instance.totalHousesCleared++;
         DifficultyHandler.Instance.difficulty = Mathf.Ceil(DifficultyHandler.Instance.difficulty);

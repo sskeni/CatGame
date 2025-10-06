@@ -23,10 +23,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth = PlayerStats.Instance.maxHealth;
     }
 
-    // Fully heals when setting max health
-    public void SetMaxHealth(float newMaxHealth)
+    // Fully heals
+    public void FullyHeal()
     {
-        currentHealth = PlayerStats.Instance.maxHealth; 
+        currentHealth = PlayerStats.Instance.maxHealth;
     }
 
     // Damage with knockback

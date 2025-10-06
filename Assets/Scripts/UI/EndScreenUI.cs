@@ -24,13 +24,9 @@ public class EndScreenUI : MonoBehaviour
     public TextMeshProUGUI coinCountText;
     public TextMeshProUGUI chestCountText;
 
-    // Private References
-    private float timeStarted;
-
     void Awake()
     {
         CheckSingleton();
-        timeStarted = Time.time;
         gameObject.SetActive(false);
     }
 
@@ -52,7 +48,7 @@ public class EndScreenUI : MonoBehaviour
     {
         // Format time
         float timeStopped = Time.time;
-        float totalTimeInSeconds = timeStopped - timeStarted;
+        float totalTimeInSeconds = timeStopped - RunStatisticsHandler.Instance.runStartTime;
         float hours = TimeSpan.FromSeconds(totalTimeInSeconds).Hours;
         float minutes = TimeSpan.FromSeconds(totalTimeInSeconds).Minutes;
         float seconds = TimeSpan.FromSeconds(totalTimeInSeconds).Seconds;
@@ -62,7 +58,7 @@ public class EndScreenUI : MonoBehaviour
         levelText.text = "Level " + PlayerLevel.Instance.level;
         healthText.text = "Health: " + PlayerStats.Instance.maxHealth;
         healthRegenRateText.text = "Health Regen Rate: " + PlayerStats.Instance.healthRegen;
-        attackText.text = "Attack: " + PlayerStats.Instance.attackDamage;
+        attackText.text = "Attack: " + (PlayerStats.Instance.attackDamage * PlayerStats.Instance.attackMultiplier);
         critRateText.text = "Critical Rate: " + PlayerStats.Instance.critChance + "%";
         critDamageText.text = "Critical Damage: " + PlayerStats.Instance.critDamage + "%";
 
