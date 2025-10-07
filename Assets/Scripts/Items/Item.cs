@@ -329,6 +329,11 @@ public class KungFuTraining : Item
         return "Increases max attacks. Allows attacking multiple times in a row.";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/KungFuTraining");
+    }
+
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float modifier = stacks;
@@ -354,6 +359,11 @@ public class Mirror : Item
         return "Lifesteal does damage instead";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/Mirror");
+    }
+
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         stats.lifestealDoesDamage = true;
@@ -376,6 +386,11 @@ public class BloodThirst : Item
     public override string GiveDescription()
     {
         return "Lifesteal effect is doubled, but can no longer passively regen health";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/BloodThirst");
     }
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
@@ -404,6 +419,11 @@ public class FuzzyDice : Item
         return "All damage now does a random amount of damage from 75% to 150%";
     }
 
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/FuzzyDice");
+    }
+
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         float lower = -0.25f;
@@ -424,6 +444,11 @@ public class MetalClaws : Item
     public override string GiveDescription()
     {
         return "Increases attack damage multiplier";
+    }
+
+    public override Sprite GiveSprite()
+    {
+        return Resources.Load<Sprite>("Item Images/MetalClaws");
     }
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
