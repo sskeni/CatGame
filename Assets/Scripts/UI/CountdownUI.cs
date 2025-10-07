@@ -29,12 +29,15 @@ public class CountdownUI : MonoBehaviour
         }
     }
 
+    // Opens the countdown UI
+    [ContextMenu("Start Countdown")]
     public void OpenUI()
     {
         this.gameObject.SetActive(true);
         StartCoroutine(Countdown());
     }
 
+    // Counts down and then reloads the level
     private IEnumerator Countdown()
     {
         int timeLeft = countdownTime;

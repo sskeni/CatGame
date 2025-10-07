@@ -815,12 +815,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d0b42d270b37d49acf43283d94af97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
   rb: {fileID: 0}
   sprite: {fileID: 0}
   anim: {fileID: 0}
   health: {fileID: 0}
-  level: {fileID: 0}
   attack: {fileID: 0}
   movement: {fileID: 0}
 --- !u!114 &1686755250312063052
@@ -837,6 +835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
   damageShakeData: {fileID: 11400000, guid: 354c8cb88c9e8994f950458e2988b6f8, type: 2}
+  damageClip: {fileID: 8300000, guid: d63ce70f894dc234f88614bbd6e29d11, type: 3}
+  damageVolume: 0.75
+  damagePitchRange: 0.05
   canPassivelyRegen: 1
 --- !u!114 &3945310899225327931
 MonoBehaviour:
@@ -855,6 +856,9 @@ MonoBehaviour:
     m_Bits: 64
   boxSize: {x: 0.69, y: 0.08}
   castDistance: 0.42
+  jumpSoundClip: {fileID: 8300000, guid: e895b2b851556154cb05b48c0a06e40f, type: 3}
+  jumpVolume: 0.5
+  jumpPitchRange: 0.1
   move: {x: 0, y: 0}
   jumpsLeft: 0
 --- !u!114 &2600127922581738272
@@ -873,6 +877,9 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
+  attackSoundClip: {fileID: 8300000, guid: 905e251bf9efd7741ab7bd026704a940, type: 3}
+  attackVolume: 0.5
+  attackPitchRange: 0.1
 --- !u!114 &6604055336994460752
 MonoBehaviour:
   m_ObjectHideFlags: 0

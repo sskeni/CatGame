@@ -15,6 +15,10 @@ public class CoinPickup : MonoBehaviour
     public GameObject parentObject;
     public Animator anim;
 
+    public AudioClip pickUpSoundClip;
+    public float pickUpVolume;
+    public float pickUpPitchRange;
+
     // Private References
     private bool pickupable;
 
@@ -36,6 +40,7 @@ public class CoinPickup : MonoBehaviour
     {
         if (collision.tag == "Player" && pickupable)
         {
+            SoundFXHandler.Instance.PlaySoundFXClip(pickUpSoundClip, transform, pickUpVolume, pickUpPitchRange, pickUpPitchRange);
             PlayerCoins.Instance.AddCoins(coinAmount);
             Destroy(parentObject);
         }

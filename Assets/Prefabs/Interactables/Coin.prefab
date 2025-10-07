@@ -177,6 +177,9 @@ MonoBehaviour:
   rb: {fileID: 4667505365604658460}
   parentObject: {fileID: 7020237724517999924}
   anim: {fileID: 4243042466408435291}
+  pickUpSoundClip: {fileID: 8300000, guid: 9cd563b105d0de04d88ab483e1c940d2, type: 3}
+  pickUpVolume: 0.5
+  pickUpPitchRange: 0
 --- !u!1 &7020237724517999924
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class CatFood : Item
 
     public override string GiveDescription()
     {
-        return "Increases max health";
+        return "Increases max health and fully heals";
     }
 
     public override Sprite GiveSprite()

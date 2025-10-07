@@ -4916,6 +4916,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceAmount: 1
+  experiencePickUpSoundClip: {fileID: 8300000, guid: 07aee8333f652ec468b97d3a22eaf16d, type: 3}
+  experiencePickUpVolume: 0.25
+  experiencePickUpPitchRange: 0
 --- !u!114 &1982259226100878161
 MonoBehaviour:
   m_ObjectHideFlags: 0

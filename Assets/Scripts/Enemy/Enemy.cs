@@ -9,17 +9,25 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] public float maxHealth;
     [SerializeField] private float experienceAmount;
     [SerializeField] private float healthVariance;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask groundLayer;
 
     // Enemy Prefabs
     [SerializeField] private EnemyHealthBar healthBar;
     [SerializeField] private DamageNumber damageNumberPrefab;
     [SerializeField] private GameObject experienceOrbParticleSystemPrefab;
     [SerializeField] private GameObject coinPrefab;
-    public ShakeData critShake;
+    [SerializeField] private ShakeData critShake;
+    [SerializeField] private AudioClip damageSoundClip;
+    [SerializeField] private float damageVolume;
+    [SerializeField] private float damagePitchRange;
+    [SerializeField] private AudioClip damageCritSoundClip;
+    [SerializeField] private float damageCritVolume;
+    [SerializeField] private float damageCritPitchRange;
 
     // Damage References
     public float currentHealth { get; private set; }
-    public bool hasTakenDamage { get; set; }
+    public bool canTakeDamage { get; set; } = true;
     private bool isDying;
 
     // Room ID
@@ -43,10 +51,13 @@ public class Enemy : MonoBehaviour, IDamageable
     // Damages the enemy
     public void Damage(float damageAmount, bool wasCrit)
     {
-        hasTakenDamage = true;
+        canTakeDamage = false;
         currentHealth -= damageAmount;
         SpawnDamageNumber(damageAmount, wasCrit);
         healthBar.SetCurrentHealth(currentHealth);
+
+        if (wasCrit) SoundFXHandler.Instance.PlaySoundFXClip(damageCritSoundClip, transform, damageCritVolume, damageCritPitchRange, damageCritPitchRange); 
+        else SoundFXHandler.Instance.PlaySoundFXClip(damageSoundClip, transform, damageVolume, damagePitchRange, damagePitchRange);
 
         if (wasCrit) CameraShakerHandler.Shake(critShake);
         if (currentHealth <= 0) Die();
@@ -105,5 +116,10 @@ public class Enemy : MonoBehaviour, IDamageable
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
             Instantiate(coinPrefab, spawnPos, Quaternion.identity);
         }
+    }
+
+    public bool isGrounded()
+    {
+        return Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, groundLayer);
     }
 }

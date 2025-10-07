@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float castDistance;
 
+    [SerializeField] private AudioClip jumpSoundClip;
+    [SerializeField] private float jumpVolume;
+    [SerializeField] private float jumpPitchRange;
+
     // Private Variables
     public Vector2 move;
     public int jumpsLeft;
@@ -112,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
 
             // do animation
             anim.SetBool("jumping", true);
+
+            SoundFXHandler.Instance.PlaySoundFXClip(jumpSoundClip, transform, jumpVolume, jumpPitchRange, jumpPitchRange);
         }
     }
 

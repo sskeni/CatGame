@@ -10,6 +10,9 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
     private ParticleSystem ps;
     private List<Particle> particleList = new List<Particle>();
     [HideInInspector] public float experienceAmount = 1f;
+    [SerializeField] private AudioClip experiencePickUpSoundClip;
+    [SerializeField] private float experiencePickUpVolume;
+    [SerializeField] private float experiencePickUpPitchRange;
 
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class ExperienceOrbParticleCollision : MonoBehaviour
 
             // Give player experience
             PlayerLevel.Instance.GiveExperience(experienceAmount / ps.main.maxParticles);
+            SoundFXHandler.Instance.PlaySoundFXClip(experiencePickUpSoundClip, transform, experiencePickUpVolume, experiencePickUpPitchRange, experiencePickUpPitchRange);
         }
         // Replace triggered particles in particle system
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, particleList);

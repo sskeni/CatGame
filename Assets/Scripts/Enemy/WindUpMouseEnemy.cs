@@ -6,17 +6,20 @@ public class WindUpMouseEnemy: MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private GameObject eyeLight;
+    [SerializeField] private GameObject jumpDetector;
 
     // Move Stats
     [SerializeField] private float moveSpeed;
 
     // Private References
     private GameObject playerRef = null;
-    private float eyeInitialPos;
+    private float eyeInitialXPos;
+    private float jumpDetectorInitialXPos;
 
     private void Start()
     {
-        eyeInitialPos = eyeLight.transform.localPosition.x;
+        eyeInitialXPos = eyeLight.transform.localPosition.x;
+        jumpDetectorInitialXPos = jumpDetector.transform.localPosition.x;
     }
 
     private void FixedUpdate()
@@ -49,13 +52,15 @@ public class WindUpMouseEnemy: MonoBehaviour
             {
                 rb.AddForce(new Vector2(-moveSpeed, 0f));
                 sprite.flipX = true; // Look right
-                eyeLight.transform.localPosition = new Vector3(-eyeInitialPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
+                eyeLight.transform.localPosition = new Vector3(-eyeInitialXPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
+                jumpDetector.transform.localPosition = new Vector3(-jumpDetectorInitialXPos, jumpDetector.transform.localPosition.y, jumpDetector.transform.localPosition.z);
             }
             else // Move left
             {
                 rb.AddForce(new Vector2(moveSpeed, 0f));
                 sprite.flipX = false; // Look left
-                eyeLight.transform.localPosition = new Vector3(eyeInitialPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
+                eyeLight.transform.localPosition = new Vector3(eyeInitialXPos, eyeLight.transform.localPosition.y, eyeLight.transform.localPosition.z);
+                jumpDetector.transform.localPosition = new Vector3(jumpDetectorInitialXPos, jumpDetector.transform.localPosition.y, jumpDetector.transform.localPosition.z);
             }
         }
     }

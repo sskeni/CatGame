@@ -227,6 +227,7 @@ MonoBehaviour:
   rb: {fileID: 4072771915631381407}
   sprite: {fileID: 6132554656880845180}
   eyeLight: {fileID: 474447055186503079}
+  jumpDetector: {fileID: 7643660342187306325}
   moveSpeed: 15
 --- !u!61 &3284719773473065964
 BoxCollider2D:
@@ -274,99 +275,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 20, y: 5}
   m_EdgeRadius: 0
---- !u!1 &3448788591126518203
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2832245891478310419}
-  - component: {fileID: 3314490128267342576}
-  - component: {fileID: 2644957876132768511}
-  m_Layer: 0
-  m_Name: JumpDetectorLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2832245891478310419
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3448788591126518203}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 0.125, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3286011890291920301}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3314490128267342576
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3448788591126518203}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 1975
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.25, y: 0.75}
-  m_EdgeRadius: 0
---- !u!114 &2644957876132768511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3448788591126518203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e687c0b0d8a08f241a90395cfaab923d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4072771915631381407}
-  jumpForce: 600
 --- !u!1 &7334426498698992938
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +309,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6982688364527583241}
-  - {fileID: 2832245891478310419}
   - {fileID: 6151790805903737186}
   - {fileID: 6863591629084635813}
   - {fileID: 8639484180357111210}
@@ -551,11 +458,21 @@ MonoBehaviour:
   maxHealth: 3
   experienceAmount: 10
   healthVariance: 0
+  groundCheckDistance: 1.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   healthBar: {fileID: 1904190901322675092}
   damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
   experienceOrbParticleSystemPrefab: {fileID: 8685911672432163805, guid: e17c3b0e10cef4d41a9d04de6484a1eb, type: 3}
   coinPrefab: {fileID: 7020237724517999924, guid: 1a4823a5fc03f35459f4fac62ba099b5, type: 3}
   critShake: {fileID: 11400000, guid: b726a17bcb72dd84c90adf610f333e0d, type: 2}
+  damageSoundClip: {fileID: 8300000, guid: 914f6639dc011aa499b31d49ed8682ef, type: 3}
+  damageVolume: 0.5
+  damagePitchRange: 0.2
+  damageCritSoundClip: {fileID: 8300000, guid: 1db96eb834f8cb94c8b2c04e4f59e951, type: 3}
+  damageCritVolume: 0.75
+  damageCritPitchRange: 0.1
 --- !u!1 &7643660342187306325
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4072771915631381407}
+  enemy: {fileID: 8080184068828007648}
   jumpForce: 600
 --- !u!1001 &8046795758438749643
 PrefabInstance:

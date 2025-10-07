@@ -8,6 +8,9 @@ public class PlayerMeleeAttack : MonoBehaviour
 {
     [SerializeField] private float attackVelocity = 25;
     [SerializeField] private LayerMask attackLayer;
+    [SerializeField] private AudioClip attackSoundClip;
+    [SerializeField] private float attackVolume;
+    [SerializeField] private float attackPitchRange;
 
     // Component References
     private Rigidbody2D rb;
@@ -47,6 +50,8 @@ public class PlayerMeleeAttack : MonoBehaviour
             // Run animation
             anim.SetTrigger("attack");
 
+            SoundFXHandler.Instance.PlaySoundFXClip(attackSoundClip, transform, attackVolume, attackPitchRange, attackPitchRange);
+
             // Apply physics
             Vector2 attackDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             attackDirection = attackDirection.normalized;
@@ -62,7 +67,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     public IEnumerator DamageWhileAnimationIsActive()
     {
         shouldBeDamaging = true;
-        PlayerController.Instance.health.hasTakenDamage = true; // Player is invincible while attacking
+        PlayerController.Instance.health.canTakeDamage = false; // Player is invincible while attacking
         rb.gravityScale = 1; // Lower gravity while attacking
 
         while (shouldBeDamaging)
@@ -81,7 +86,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             {
                 IDamageable iDamageable = attackHits[i].collider.gameObject.GetComponent<IDamageable>();
 
-                if (iDamageable != null && !iDamageable.hasTakenDamage) // Check hasTakenDamage to make sure we don't attack one object multiple times
+                if (iDamageable != null && iDamageable.canTakeDamage) // Check hasTakenDamage to make sure we don't attack one object multiple times
                 {
                     Tuple<float, bool> damage = CalculateAttackDamage();
 
@@ -104,7 +109,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.health.hasTakenDamage = false; // Make player attackable again
+        PlayerController.Instance.health.canTakeDamage = true; // Make player attackable again
         rb.gravityScale = 5f; // Enable gravity again
         ReturnAttackablesToDamageable();
     }
@@ -114,7 +119,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         foreach (IDamageable damageable in iDamageables)
         {
-            damageable.hasTakenDamage = false;
+            damageable.canTakeDamage = true;
         }
 
         iDamageables.Clear();

@@ -8,17 +8,26 @@ public class LaserEnemy : MonoBehaviour
     [SerializeField] private float attackSpeed;
     [SerializeField] private GameObject laserProjectilePrefab;
     [SerializeField] private GameObject projectileOrigin;
+    [SerializeField] private AudioClip laserShootSoundClip;
+    [SerializeField] private float laserShootVolume;
+    [SerializeField] private float laserShootPitchRange;
 
     // Private References
     private bool lookAtPlayer = false;
     private GameObject playerRef;
     private float attackCooldownTimer;
 
+    private void Start()
+    {
+        attackCooldownTimer = Random.Range(0f, attackSpeed);
+    }
+
     private void FixedUpdate()
     {
         RotateToPlayer();
         CountCooldownTimer();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -64,7 +73,7 @@ public class LaserEnemy : MonoBehaviour
             laser.transform.rotation = projectileOrigin.transform.rotation;
             laser.transform.SetParent(null);
             attackCooldownTimer = 0;
+            SoundFXHandler.Instance.PlaySoundFXClip(laserShootSoundClip, transform, laserShootVolume, laserShootPitchRange, laserShootPitchRange);
         }
     }
-
 }

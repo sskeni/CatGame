@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 887927756320933533}
   - component: {fileID: 669063714793801034}
   - component: {fileID: 9020030286722577668}
+  - component: {fileID: 1890196486509499171}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -285,3 +286,21 @@ MonoBehaviour:
   hoverScale: 1.1
   scaleDuration: 0.2
   canClick: 0
+--- !u!114 &1890196486509499171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710763311285676129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2731811e88f6664798422f1c03a2d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSoundClip: {fileID: 8300000, guid: bfffcd453d8b7db4a848933de8313d7a, type: 3}
+  hoverVolume: 0.25
+  hoverPitchRange: 0
+  pressedSoundClip: {fileID: 8300000, guid: 0533e4e12b73f284b837a81a6063ef86, type: 3}
+  pressedVolume: 0.5
+  pressedPitchRange: 0

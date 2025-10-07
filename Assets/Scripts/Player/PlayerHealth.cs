@@ -7,11 +7,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     // Prefab References
     [SerializeField] private DamageNumber damageNumberPrefab;
-    public ShakeData damageShakeData;
+    [SerializeField] private ShakeData damageShakeData;
+    [SerializeField] private AudioClip damageClip;
+    [SerializeField] private float damageVolume;
+    [SerializeField] private float damagePitchRange;
 
     // Damage Variables
     public float currentHealth { get; private set; }
-    public bool hasTakenDamage { get; set; }
+    public bool canTakeDamage { get; set; } = true;
     public bool canPassivelyRegen = true;
 
     private bool isRegeningHealth = false;
@@ -32,7 +35,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Damage with knockback
     public void DamageWithKnockback(float damageAmount, Vector3 otherPostiion)
     {
-        if (hasTakenDamage == false)
+        if (canTakeDamage == true)
         {
             Vector2 knockbackDirection = transform.position - otherPostiion;
             knockbackDirection = knockbackDirection.normalized;
@@ -44,13 +47,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Damage the player
     public void Damage(float damageAmount, bool wasCrit)
     {
-        if (hasTakenDamage == false)
+        if (canTakeDamage == true)
         {
-            hasTakenDamage = true;
+            canTakeDamage = false;
             currentHealth -= damageAmount;
             SpawnDamageNumber(damageAmount);
             StartCoroutine(DoDamageAnimation());
             CameraShakerHandler.Shake(damageShakeData);
+            SoundFXHandler.Instance.PlaySoundFXClip(damageClip, transform, damageVolume, damagePitchRange, damagePitchRange);
 
             // If currently regening, stop
             if (regenCoroutine != null)
@@ -79,7 +83,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(0.1f);
         }
 
-        if(!isDying) hasTakenDamage = false; // Let the Player be damageable again if they are not dead
+        if(!isDying && !PlayerController.Instance.attack.shouldBeDamaging) canTakeDamage = true; // Let the Player be damageable again if they are not dead and not attacking
         PlayerController.Instance.sprite.enabled = true; // Make sure sprite is visible at the end
     }
 
