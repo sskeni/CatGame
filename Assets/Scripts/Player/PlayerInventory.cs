@@ -75,4 +75,9 @@ public class PlayerInventory : MonoBehaviour
 
         return 0;
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= ReloadAllItems;
+    }
 }
