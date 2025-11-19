@@ -1,14 +1,12 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemChest : Interactable
+public class HealingFountain : Interactable
 {
     // UI References
     [SerializeField] private GameObject uiPrompt;
     [SerializeField] private TextMeshProUGUI costText;
-    
+
     // Public References
     public int cost;
 
@@ -29,25 +27,16 @@ public class ItemChest : Interactable
         return PlayerCoins.Instance.CoinCount() >= cost;
     }
 
-    // Buys the chest, giving the player a random item, also disables the chest from being able to be bought again
     public override void Interact()
     {
         if (interactable && CanPay() && !bought)
         {
             PlayerCoins.Instance.RemoveCoins(cost);
-
-            // Give a random item from the item pool
-            Item ItemToGive = ItemPoolManager.Instance.GetItemFromPool();
-            PlayerInventory.Instance.AddItem(ItemToGive);
-
-            LevelUIManager.Instance.itemGiven.SetItem(ItemToGive);
-            LevelUIManager.Instance.itemGiven.OpenUI();
-
-            // Keep track of chest count
-            RunStatisticsHandler.Instance.totalChestsOpened++;
-
             bought = true;
             uiPrompt.SetActive(false);
+
+            float healAmount = PlayerStats.Instance.maxHealth;
+            PlayerController.Instance.health.Heal(healAmount);
         }
     }
 

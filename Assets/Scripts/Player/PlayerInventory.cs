@@ -39,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         foreach (ItemList i in items)
         {
             i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
-            InventoryUI.Instance.UpdateItemUIStack(i);
+            LevelUIManager.Instance.inventory.UpdateItemUIStack(i);
         }
     }
 
@@ -52,13 +52,13 @@ public class PlayerInventory : MonoBehaviour
             {
                 i.stacks += 1;
                 i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
-                InventoryUI.Instance.UpdateItemUIStack(i);
+                LevelUIManager.Instance.inventory.UpdateItemUIStack(i);
                 return;
             }
         }
         ItemList itemToAdd = new ItemList(item, item.GiveName(), 1);
         items.Add(itemToAdd);
-        InventoryUI.Instance.AddItemUI(itemToAdd);
+        LevelUIManager.Instance.inventory.AddItemUI(itemToAdd);
         item.AddPlayerStats(PlayerStats.Instance, 1);
     }
 

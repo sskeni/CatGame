@@ -5,37 +5,16 @@ using UnityEngine.EventSystems;
 
 public class InventoryUI : MonoBehaviour
 {
-    // Singleton References
-    private static InventoryUI instance;
-    public static InventoryUI Instance {  get { return instance; } }
-
     // Prefab Instances
     public GameObject itemPrefab;
     public Transform basePosition;
 
     // Private References
     List<GameObject> itemUIs = new List<GameObject>();
-    
-    private void Awake()
-    {
-        CheckSingleton();
-    }
 
     private void Update()
     {
         UpdateUI();
-    }
-
-    private void CheckSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
     }
 
     // Updates the ToolTip UI based on if the mouse is hovering over a ItemUI

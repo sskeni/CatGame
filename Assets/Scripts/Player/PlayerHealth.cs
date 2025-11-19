@@ -135,6 +135,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         isDying = true;
         PlayerController.Instance.DisablePlayControls();
-        EndScreenUI.Instance.OpenUI();
+        LevelUIManager.Instance.endScreen.OpenUI();
     }
 }

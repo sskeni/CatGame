@@ -3,28 +3,12 @@ using UnityEngine;
 
 public class ItemGivenUI : MonoBehaviour
 {
-    private static ItemGivenUI instance;
-    public static ItemGivenUI Instance { get { return instance; } }
-
     public ItemUI itemUI;
     public float delayBeforeClosing;
 
     private void Awake()
     {
         this.gameObject.SetActive(false);
-        CheckSingleton();
-    }
-
-    public void CheckSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
     }
 
     public void SetItem(Item item)

@@ -9,30 +9,12 @@ using Random = UnityEngine.Random;
 
 public class ItemPickerUI: MonoBehaviour
 {
-    // Singleton References
-    private static ItemPickerUI instance;
-    public static ItemPickerUI Instance { get { return instance; } }
-
     // UI References
     public List<ItemButtonUI> buttons = new List<ItemButtonUI>();
 
     private void Start()
     {
-        CheckSingleton();
         CloseUI();
-    }
-
-    // Setup singleton
-    private void CheckSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
     }
 
     // Opens the item select UI

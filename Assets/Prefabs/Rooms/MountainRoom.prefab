@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8793104665719359712}
   - component: {fileID: 4528122949525969049}
   m_Layer: 0
-  m_Name: ChestSpawner
+  m_Name: InteractableSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPrefab: {fileID: 242606651769774480, guid: bf695d2ed59c625469620dbbf1768c02, type: 3}
+  healingFountainPrefab: {fileID: 113478211790068607, guid: e6eebceff2031aa4fbadeff124e5cb9e, type: 3}
+  minChests: 1
   maxChests: 3
+  minHealingFountains: 1
+  maxHealingFountains: 1
 --- !u!1 &1844519250031192095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,8 +1361,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 64.499985, y: 2.96875, z: 0}
-      m_Extent: {x: 3.4999847, y: 2.03125, z: 0}
+      m_Center: {x: 55.999985, y: -10.53125, z: 0}
+      m_Extent: {x: 11.999985, y: 15.53125, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0

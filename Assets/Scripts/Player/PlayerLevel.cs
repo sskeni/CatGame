@@ -57,8 +57,8 @@ public class PlayerLevel : MonoBehaviour
         // Calculate next levelUpExperience
         levelUpExperience = CalculateNextLevelExperienceAmount(level);
 
-        // Open Item UI
-        ItemPickerUI.Instance.OpenUI();
+        // Open Item Picker UI
+        LevelUIManager.Instance.itemPicker.OpenUI();
     }
 
     // Calculate how much experience is needed for next level up

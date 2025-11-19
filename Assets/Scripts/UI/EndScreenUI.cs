@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class EndScreenUI : MonoBehaviour
 {
-    // Singleton References
-    private static EndScreenUI instance;
-    public static EndScreenUI Instance { get { return instance; } }
-
     // UI References
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI levelText;
@@ -26,21 +22,7 @@ public class EndScreenUI : MonoBehaviour
 
     void Awake()
     {
-        CheckSingleton();
         gameObject.SetActive(false);
-    }
-
-    // Sets up singleton
-    private void CheckSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
     }
 
     // Opens the end screen and sets all the texts
