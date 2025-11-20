@@ -6,11 +6,16 @@ using Random = UnityEngine.Random;
 public class InteractableSpawner: MonoBehaviour
 {
     public GameObject chestPrefab;
-    public GameObject healingFountainPrefab;
     public int minChests;
     public int maxChests;
+
+    public GameObject healingFountainPrefab;
     public int minHealingFountains;
     public int maxHealingFountains;
+
+    public GameObject litterBoxPrefab;
+    public int minLitterBoxes;
+    public int maxLitterBoxes;
 
     // Private References
     private List<GameObject> spawnPoints = new List<GameObject>();
@@ -46,45 +51,59 @@ public class InteractableSpawner: MonoBehaviour
 
         int chestCount = Random.Range(minChests, maxChests + 1);
         int healingFountainCount = Random.Range(minHealingFountains, maxHealingFountains + 1);
-        int totalInteractableCount = chestCount + healingFountainCount;
+        int litterBoxCount = Random.Range(minLitterBoxes, maxLitterBoxes + 1);
+        int totalInteractableCount = chestCount + healingFountainCount + litterBoxCount;
 
         // just in case
         if (totalInteractableCount > spawnPoints.Count)
         {
             chestCount = spawnPoints.Count - 1;
             healingFountainCount = 1;
-            totalInteractableCount = chestCount + healingFountainCount;
+            litterBoxCount = 0;
+            totalInteractableCount = chestCount + healingFountainCount + litterBoxCount;
         }
-
-        // min value of 2 to guarantee one chest and one healing fountain
-        int[] randomIndexes = RandomSpawnIDs(totalInteractableCount, spawnPoints.Count);
 
         // Spawn all the chests
         for (int i = 0; i < chestCount; i++)
         {
-            SpawnChest(spawnPoints[randomIndexes[i]].transform);
+            GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            SpawnChest(spawnPoint.transform);
+            spawnPoints.Remove(spawnPoint);
         }
 
-        // Continue where we left off, spawn all the healing fountains
-        for (int i = chestCount; i < randomIndexes.Length; i++)
+        // Spawn all the healing fountains
+        for (int i = 0; i < healingFountainCount; i++)
         {
-            SpawnHealingFountain(spawnPoints[randomIndexes[i]].transform);
+            GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            SpawnHealingFountain(spawnPoint.transform);
+            spawnPoints.Remove(spawnPoint);
+        }
+
+        for (int i = 0; i < litterBoxCount; i++)
+        {
+            GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            SpawnLitterBox(spawnPoint.transform);
+            spawnPoints.Remove(spawnPoint);
         }
     }
 
     // Spawns a chest at a transform
-    private void SpawnChest(Transform spawnLocation)
+    private void SpawnChest(Transform spawnTransform)
     {
         // Move the position down by 0.63f to put it on the ground
         float groundOffset = -0.63f;
-        Vector3 spawnPosition = new Vector3(spawnLocation.position.x, spawnLocation.position.y + groundOffset, spawnLocation.position.z);
+        Vector3 spawnPosition = new Vector3(spawnTransform.position.x, spawnTransform.position.y + groundOffset, spawnTransform.position.z);
         Instantiate(chestPrefab, spawnPosition, Quaternion.identity);
     }
 
-    private void SpawnHealingFountain(Transform spawnLocation)
+    private void SpawnHealingFountain(Transform spawnTransform)
     {
-        Vector3 spawnPosition = spawnLocation.position;
-        Instantiate(healingFountainPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(healingFountainPrefab, spawnTransform.position, Quaternion.identity);
+    }
+
+    private void SpawnLitterBox(Transform spawnTransform)
+    {
+        Instantiate(litterBoxPrefab, spawnTransform.position, Quaternion.identity);
     }
 
     // Gives a set of unique random numbers within a range

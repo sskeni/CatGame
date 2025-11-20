@@ -109,7 +109,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.health.canTakeDamage = true; // Make player attackable again
+        if (!PlayerController.Instance.health.isInvincible) PlayerController.Instance.health.canTakeDamage = true; // Make player attackable again
         rb.gravityScale = 5f; // Enable gravity again
         ReturnAttackablesToDamageable();
     }

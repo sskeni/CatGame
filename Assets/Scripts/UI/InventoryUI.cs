@@ -17,6 +17,16 @@ public class InventoryUI : MonoBehaviour
         UpdateUI();
     }
 
+    public void OpenUI()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void CloseUI()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     // Updates the ToolTip UI based on if the mouse is hovering over a ItemUI
     private void UpdateUI()
     {
@@ -71,6 +81,15 @@ public class InventoryUI : MonoBehaviour
         }
 
         itemUIs.Add(itemObject);
+    }
+
+    public void DeleteAllItemUI()
+    {
+        foreach(GameObject item in itemUIs)
+        {
+            Destroy(item);
+        }
+        itemUIs.Clear();
     }
 
     // Checks if the mouse is over a UI Element and returns the ItemUI it's hovering over

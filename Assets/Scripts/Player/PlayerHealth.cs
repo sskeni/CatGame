@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Damage Variables
     public float currentHealth { get; private set; }
     public bool canTakeDamage { get; set; } = true;
+    public bool isInvincible = false;
     public bool canPassivelyRegen = true;
 
     private bool isRegeningHealth = false;
@@ -74,6 +75,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private IEnumerator DoDamageAnimation()
     {
         float damageTimer = 0f;
+        isInvincible = true;
 
         while (damageTimer < PlayerStats.Instance.damageIFrames)
         {
@@ -84,6 +86,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
 
         if(!isDying && !PlayerController.Instance.attack.shouldBeDamaging) canTakeDamage = true; // Let the Player be damageable again if they are not dead and not attacking
+        isInvincible = false;
         PlayerController.Instance.sprite.enabled = true; // Make sure sprite is visible at the end
     }
 

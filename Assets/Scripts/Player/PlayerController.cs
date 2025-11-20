@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
         EnablePlayControls();
         DisableUIControls();
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Start()

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class AttackIndicatorUI : MonoBehaviour
@@ -8,6 +9,7 @@ public class AttackIndicatorUI : MonoBehaviour
     public float yOffset;
     public Slider slider;
     public TextMeshProUGUI text;
+    [SerializeField] private RectTransform canvasRectTransform;
     private RectTransform rect;
 
     private void Start()
@@ -15,7 +17,7 @@ public class AttackIndicatorUI : MonoBehaviour
         rect = GetComponent<RectTransform>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         FollowMouse();
         UpdateSlider();
@@ -24,9 +26,12 @@ public class AttackIndicatorUI : MonoBehaviour
     // Follow the mouse position
     private void FollowMouse()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 targetPos = new Vector3(mousePos.x + xOffset, mousePos.y + yOffset, 0f);
-        rect.position = targetPos;
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 targetPos = new Vector3(mousePos.x + xOffset, mousePos.y + yOffset, 0f);
+        //rect.position = targetPos;
+
+
+        rect.anchoredPosition = Mouse.current.position.ReadValue();
     }
 
     // Updates the slider values and the text

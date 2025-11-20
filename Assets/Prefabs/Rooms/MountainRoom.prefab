@@ -193,11 +193,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPrefab: {fileID: 242606651769774480, guid: bf695d2ed59c625469620dbbf1768c02, type: 3}
-  healingFountainPrefab: {fileID: 113478211790068607, guid: e6eebceff2031aa4fbadeff124e5cb9e, type: 3}
   minChests: 1
   maxChests: 3
+  healingFountainPrefab: {fileID: 113478211790068607, guid: e6eebceff2031aa4fbadeff124e5cb9e, type: 3}
   minHealingFountains: 1
   maxHealingFountains: 1
+  litterBoxPrefab: {fileID: 1520837943524701110, guid: 3e70904ee08e6734d82d0a64ea5980a3, type: 3}
+  minLitterBoxes: 0
+  maxLitterBoxes: 1
 --- !u!1 &1844519250031192095
 GameObject:
   m_ObjectHideFlags: 0

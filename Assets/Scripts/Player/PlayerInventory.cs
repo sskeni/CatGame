@@ -33,13 +33,28 @@ public class PlayerInventory : MonoBehaviour
     }
 
     // Applies stat changes from all items to PlayerStats
-    [ContextMenu("Reload All Items")]
     public void ReloadAllItems(Scene scene, LoadSceneMode mode)
     {
+        LevelUIManager.Instance.inventory.DeleteAllItemUI();
         foreach (ItemList i in items)
         {
             i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
-            LevelUIManager.Instance.inventory.UpdateItemUIStack(i);
+            LevelUIManager.Instance.inventory.AddItemUI(i);
+        }
+    }
+
+    [ContextMenu("Reload All Items")]
+    public void ReloadAllItems()
+    {
+        PlayerStats.Instance.ResetAllStatsToBase();
+        PlayerStats.Instance.RemoveAllStatChanges();
+
+        LevelUIManager.Instance.inventory.DeleteAllItemUI();
+
+        foreach (ItemList i in items)
+        {
+            i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
+            LevelUIManager.Instance.inventory.AddItemUI(i);
         }
     }
 
@@ -62,6 +77,19 @@ public class PlayerInventory : MonoBehaviour
         item.AddPlayerStats(PlayerStats.Instance, 1);
     }
 
+    public void RemoveItem(Item item)
+    {
+        foreach (ItemList i in items)
+        {
+            if (i.name == item.GiveName())
+            {
+                items.Remove(i);
+                break;
+            }
+        }
+        ReloadAllItems();
+    }
+
     // Returns the number of stacks of the given item
     public int GetStack(Item itemToCheck)
     {
@@ -74,6 +102,11 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public bool IsEmpty()
+    {
+        return items.Count == 0;
     }
 
     private void OnDestroy()

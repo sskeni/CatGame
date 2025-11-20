@@ -370,7 +370,7 @@ public class Mirror : Item
     }
 }
 
-// Doubles lifesteal effect, but can no longer passively regen health
+// Doubles lifesteal effect (, but can no longer passively regen health) < this is deprecated
 public class BloodThirst : Item
 {
     public override int maxStack()
@@ -385,7 +385,7 @@ public class BloodThirst : Item
 
     public override string GiveDescription()
     {
-        return "Lifesteal effect is doubled, but can no longer passively regen health";
+        return "Lifesteal effect is doubled";
     }
 
     public override Sprite GiveSprite()

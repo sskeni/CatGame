@@ -838,7 +838,7 @@ MonoBehaviour:
   damageClip: {fileID: 8300000, guid: d63ce70f894dc234f88614bbd6e29d11, type: 3}
   damageVolume: 0.75
   damagePitchRange: 0.05
-  canPassivelyRegen: 1
+  canPassivelyRegen: 0
 --- !u!114 &3945310899225327931
 MonoBehaviour:
   m_ObjectHideFlags: 0

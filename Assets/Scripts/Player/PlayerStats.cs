@@ -97,6 +97,49 @@ public class PlayerStats : MonoBehaviour
         baseLifestealMultiplier = lifestealMultiplier;
     }
 
+    public void RemoveAllStatChanges()
+    {
+        moveSpeedChange.Clear();
+        maxJumpChange.Clear();
+
+        attackDamageChange.Clear();
+        attackMultiplierChange.Clear();
+        attackCooldownChange.Clear();
+        critChanceChange.Clear();
+        critDamageChange.Clear();
+        lowerDamageVarianceChange.Clear();
+        upperDamageVarianceChange.Clear();
+        maxAttackChange.Clear();
+
+        maxHealthChange.Clear();
+        healthRegenChange.Clear();
+
+        lifestealChange.Clear();
+        lifestealMultiplierChange.Clear();
+    }
+
+    public void ResetAllStatsToBase()
+    {
+        moveSpeed = baseMoveSpeed;
+        maxJumps = baseMaxJumps;
+
+        attackDamage = baseAttackDamage;
+        attackMultiplier = baseAttackMultiplier;
+        attackCooldown = baseAttackCooldown;
+        critChance = baseCritChance;
+        critDamage = baseCritDamage;
+        lowerDamageVariance = baseLowerDamageVariance;
+        upperDamageVariance = baseUpperDamageVariance;
+        maxAttacks = baseMaxAttacks;
+
+        maxHealth = baseMaxHealth;
+        healthRegen = baseHealthRegen;
+        regenDelay = baseRegenDelay;
+
+        lifesteal = baseLifesteal;
+        lifestealMultiplier = baseLifestealMultiplier;
+    }
+
     public void AddStat(string name, float modifier, Stat statType)
     {
         switch (statType)

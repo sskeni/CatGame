@@ -11871,8 +11871,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: -0.000015258789, y: 5, z: 0}
-      m_Extent: {x: 31.999985, y: 32, z: 0}
+      m_Center: {x: -12.5, y: 8.5, z: 0}
+      m_Extent: {x: 16.5, y: 16.5, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
@@ -12456,11 +12456,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPrefab: {fileID: 242606651769774480, guid: bf695d2ed59c625469620dbbf1768c02, type: 3}
-  healingFountainPrefab: {fileID: 113478211790068607, guid: e6eebceff2031aa4fbadeff124e5cb9e, type: 3}
   minChests: 1
   maxChests: 3
+  healingFountainPrefab: {fileID: 113478211790068607, guid: e6eebceff2031aa4fbadeff124e5cb9e, type: 3}
   minHealingFountains: 1
   maxHealingFountains: 1
+  litterBoxPrefab: {fileID: 1520837943524701110, guid: 3e70904ee08e6734d82d0a64ea5980a3, type: 3}
+  minLitterBoxes: 0
+  maxLitterBoxes: 1
 --- !u!1 &8522153811620766320
 GameObject:
   m_ObjectHideFlags: 0

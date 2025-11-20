@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
     private void Start()
     {
         if (PersistentObjectCleaner.Instance != null) PersistentObjectCleaner.Instance.CleanObjects();

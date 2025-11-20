@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class ToolTipManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ToolTipManager : MonoBehaviour
     public static ToolTipManager Instance { get { return instance; } }
 
     // UI Refences
+    [SerializeField] private RectTransform canvasRectTransform;
     public TextMeshProUGUI textUI;
     public float positionOffset;
     private RectTransform rect;
@@ -65,9 +67,14 @@ public class ToolTipManager : MonoBehaviour
     // Makes the tool tip follow the mouse
     private void FollowMouse()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 targetPos = new Vector3(mousePos.x + positionOffset, mousePos.y + positionOffset, 0f);
-        rect.position = targetPos;
-        //rect.anchoredPosition = Input.mousePosition;
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 targetPos = new Vector3(mousePos.x + positionOffset, mousePos.y + positionOffset, 0f);
+        //rect.position = targetPos;
+
+        Vector3 screenPoint = Mouse.current.position.ReadValue() / canvasRectTransform.localScale.x;
+        screenPoint.z = 10.0f;
+        transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+
+        //rect.anchoredPosition = Mouse.current.position.ReadValue();
     }
 }

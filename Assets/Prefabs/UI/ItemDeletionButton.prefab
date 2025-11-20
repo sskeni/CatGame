@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 4397279253079575719}
   - component: {fileID: 1671467243983130892}
   - component: {fileID: 5505888582702284960}
-  m_Layer: 5
+  - component: {fileID: 8655457005997814534}
+  m_Layer: 10
   m_Name: ItemDeletionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,10 +90,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4397279253079575719}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8655457005997814534}
+        m_TargetAssemblyTypeName: ItemDeletionButtonUI, Assembly-CSharp
+        m_MethodName: DeleteItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4397279253079575719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +168,18 @@ MonoBehaviour:
   hoverScale: 1.1
   scaleDuration: 0.2
   canClick: 0
+--- !u!114 &8655457005997814534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279635829541192265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25cf4ac5b3c5a574ea268a7e32004553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5724576514022836277
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +191,7 @@ GameObject:
   - component: {fileID: 5178938575974378180}
   - component: {fileID: 649261917927971650}
   - component: {fileID: 2527989610646362933}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: StackCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
