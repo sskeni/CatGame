@@ -6,6 +6,7 @@ public class PauseUI : MonoBehaviour
 {
     // Private References
     private bool isPaused;
+    private float resumeTimeScale;
 
     private void Start()
     {
@@ -19,17 +20,22 @@ public class PauseUI : MonoBehaviour
     public void PauseGame()
     {
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0 : 1;
         this.gameObject.SetActive(isPaused);
         if (isPaused)
         {
             PlayerController.Instance.DisablePlayControls();
             PlayerController.Instance.EnableUIControls();
+            resumeTimeScale = Time.timeScale;
+            Time.timeScale = 0;
         }
         else
         {
-            PlayerController.Instance.EnablePlayControls();
-            PlayerController.Instance.DisableUIControls();
+            if (resumeTimeScale != 0)
+            {
+                PlayerController.Instance.EnablePlayControls();
+                PlayerController.Instance.DisableUIControls();
+            }
+            Time.timeScale = resumeTimeScale;
         }
 
     }

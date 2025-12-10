@@ -193,7 +193,7 @@ Canvas:
   m_GameObject: {fileID: 304415255160185916}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
@@ -201,7 +201,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -5709,11 +5709,11 @@ RectTransform:
   - {fileID: 2392969325004288467}
   m_Father: {fileID: 8892401290381298109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &8034167998258397932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5730,6 +5730,7 @@ MonoBehaviour:
   yOffset: -0.7
   slider: {fileID: 7041637264943554341}
   text: {fileID: 4460602932458686269}
+  canvasRectTransform: {fileID: 8892401290381298109}
 --- !u!1 &7609433722454299777
 GameObject:
   m_ObjectHideFlags: 0
@@ -6642,8 +6643,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ae04ebedcccb47b9bc636c0e96223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRectTransform: {fileID: 8892401290381298109}
   textUI: {fileID: 3723334722910503247}
-  positionOffset: 0.1
+  positionOffset: 10
 --- !u!1 &8401972322385625643
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,8 @@ public class AttackIndicatorUI : MonoBehaviour
         //rect.position = targetPos;
 
 
-        rect.anchoredPosition = Mouse.current.position.ReadValue();
+        //rect.anchoredPosition = Mouse.current.position.ReadValue();
+        transform.position = Mouse.current.position.ReadValue();
     }
 
     // Updates the slider values and the text

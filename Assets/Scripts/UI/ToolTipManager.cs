@@ -71,10 +71,14 @@ public class ToolTipManager : MonoBehaviour
         //Vector3 targetPos = new Vector3(mousePos.x + positionOffset, mousePos.y + positionOffset, 0f);
         //rect.position = targetPos;
 
-        Vector3 screenPoint = Mouse.current.position.ReadValue() / canvasRectTransform.localScale.x;
-        screenPoint.z = 10.0f;
-        transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+        //Vector3 screenPoint = Mouse.current.position.ReadValue() / canvasRectTransform.localScale.x;
+        //screenPoint.z = 10.0f;
+        //transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
 
         //rect.anchoredPosition = Mouse.current.position.ReadValue();
+
+        Vector3 mousePos = Mouse.current.position.ReadValue();
+        Vector3 targetPos = new Vector3(mousePos.x + positionOffset, mousePos.y + positionOffset, 0f);
+        transform.position = targetPos;
     }
 }
