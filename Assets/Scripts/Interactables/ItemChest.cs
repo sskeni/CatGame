@@ -8,6 +8,7 @@ public class ItemChest : Interactable
     // UI References
     [SerializeField] private GameObject uiPrompt;
     [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private Sprite usedSprite;
     
     // Public References
     public int cost;
@@ -45,6 +46,8 @@ public class ItemChest : Interactable
 
             // Keep track of chest count
             RunStatisticsHandler.Instance.totalChestsOpened++;
+
+            GetComponent<SpriteRenderer>().sprite = usedSprite;
 
             bought = true;
             uiPrompt.SetActive(false);

@@ -6,6 +6,7 @@ public class ItemLitterBox : Interactable
     // UI References
     [SerializeField] private GameObject uiPrompt;
     [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private Sprite usedSprite;
 
     // Public References
     public int cost;
@@ -36,6 +37,8 @@ public class ItemLitterBox : Interactable
             uiPrompt.SetActive(false);
 
             LevelUIManager.Instance.itemDeletion.OpenUI();
+
+            GetComponent<SpriteRenderer>().sprite = usedSprite;
         }
     }
 

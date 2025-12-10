@@ -6,6 +6,8 @@ public class HealingFountain : Interactable
     // UI References
     [SerializeField] private GameObject uiPrompt;
     [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private Sprite usedSprite;
+    [SerializeField] private GameObject pointLight;
 
     // Public References
     public int cost;
@@ -34,6 +36,9 @@ public class HealingFountain : Interactable
             PlayerCoins.Instance.RemoveCoins(cost);
             bought = true;
             uiPrompt.SetActive(false);
+            
+            GetComponent<SpriteRenderer>().sprite = usedSprite;
+            pointLight.SetActive(false);
 
             float healAmount = PlayerStats.Instance.maxHealth;
             PlayerController.Instance.health.Heal(healAmount);
