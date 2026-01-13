@@ -7,6 +7,11 @@ public class LaserEnemyProjectile : MonoBehaviour
     [SerializeField] private float hitDamage;
     [SerializeField] private float speed;
 
+    private void Start()
+    {
+        hitDamage *= DifficultyHandler.Instance.difficulty;
+    }
+
     private void FixedUpdate()
     {
         Move();

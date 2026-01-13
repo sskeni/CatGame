@@ -21,7 +21,6 @@ public class RunStatisticsHandler : MonoBehaviour
     private void Start()
     {
         runStartTime = Time.time;
-        print("Time Started: " + runStartTime);
     }
 
     // Set up singleton

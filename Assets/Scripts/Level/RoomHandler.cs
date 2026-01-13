@@ -25,6 +25,7 @@ public class RoomHandler : MonoBehaviour
     public float expandScale;
     public float shrinkTime;
     public float shrinkScale;
+    public bool firstEnemySpawn = true;
     
     // Public References
     [HideInInspector] public int roomsCleared;
@@ -89,7 +90,6 @@ public class RoomHandler : MonoBehaviour
         roomClearText.gameObject.SetActive(false);*/
 
         float elapsedTime = 0;
-
         while (elapsedTime < expandTime)
         {
             float textScale = Mathf.Lerp(0, expandScale, (elapsedTime / expandTime));

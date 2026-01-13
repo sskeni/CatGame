@@ -25,6 +25,14 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!spawnedEnemies)
             {
+                if (RoomHandler.Instance.firstEnemySpawn)
+                {
+                    RoomHandler.Instance.firstEnemySpawn = false;
+                }
+                else
+                {
+                    DifficultyHandler.Instance.difficulty += RoomHandler.Instance.roomDifficultyIncrease;
+                }
                 SpawnAllEnemies();
                 spawnedEnemies = true;
             }

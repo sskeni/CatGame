@@ -43,7 +43,6 @@ public class Enemy : MonoBehaviour, IDamageable
     private void SetUpHealth()
     {
         maxHealth *= DifficultyHandler.Instance.difficulty;
-        //maxHealth *= Random.Range(1f - healthVariance, 1f);
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         healthBar.SetCurrentHealth(currentHealth);

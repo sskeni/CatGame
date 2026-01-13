@@ -11,6 +11,12 @@ public class ItemPickerUI: MonoBehaviour
 {
     // UI References
     public List<ItemButtonUI> buttons = new List<ItemButtonUI>();
+    public GameObject LevelUpImage;
+    public GameObject LevelUpParticleSystem;
+    public float expandTime;
+    public float expandScale;
+    public float shrinkTime;
+    public float shrinkScale;
 
     private void Start()
     {
@@ -30,9 +36,33 @@ public class ItemPickerUI: MonoBehaviour
     // Open UI Coroutine
     private IEnumerator OpenUICoroutine()
     {
+        LevelUpParticleSystem.gameObject.SetActive(true);
+        LevelUpImage.gameObject.SetActive(true);
+        LevelUpImage.gameObject.transform.localScale = Vector3.zero;
+
+        float elapsedTime = 0;
+        while (elapsedTime < expandTime)
+        {
+            float textScale = Mathf.SmoothStep(0, expandScale, (elapsedTime / expandTime));
+            elapsedTime += Time.unscaledDeltaTime;
+            LevelUpImage.gameObject.transform.localScale = new Vector3(textScale, textScale, textScale);
+            yield return null;
+        }
+
+        elapsedTime = 0;
+        while (elapsedTime < shrinkTime)
+        {
+            float textScale = Mathf.SmoothStep(expandScale, shrinkScale, (elapsedTime / shrinkTime));
+            elapsedTime += Time.unscaledDeltaTime;
+            LevelUpImage.gameObject.transform.localScale = new Vector3(textScale, textScale, textScale);
+            yield return null;
+        }
+
         AssignRandomItemToButtons();
 
         yield return new WaitForSecondsRealtime(0.5f);
+        
+        LevelUpImage.gameObject.SetActive(false);
         ActivateButtons();
     }
 
@@ -42,6 +72,7 @@ public class ItemPickerUI: MonoBehaviour
         Time.timeScale = 1;
         this.gameObject.SetActive(false);
         DeactivateButtons();
+        LevelUpParticleSystem.gameObject.SetActive(false);
         PlayerController.Instance.EnablePlayControls();
         PlayerController.Instance.DisableUIControls();
     }
