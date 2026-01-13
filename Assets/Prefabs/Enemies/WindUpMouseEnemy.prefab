@@ -465,6 +465,7 @@ MonoBehaviour:
   healthBar: {fileID: 1904190901322675092}
   damageNumberPrefab: {fileID: 3386061117843247757, guid: 4d4475e3990a98f439c1f9c63d5f78b9, type: 3}
   experienceOrbParticleSystemPrefab: {fileID: 8685911672432163805, guid: e17c3b0e10cef4d41a9d04de6484a1eb, type: 3}
+  gearParticleSystemPrefab: {fileID: 2896196389599503783, guid: 51ed1dd92f77e004db4523ef683be224, type: 3}
   coinPrefab: {fileID: 7020237724517999924, guid: 1a4823a5fc03f35459f4fac62ba099b5, type: 3}
   critShake: {fileID: 11400000, guid: b726a17bcb72dd84c90adf610f333e0d, type: 2}
   damageSoundClip: {fileID: 8300000, guid: 914f6639dc011aa499b31d49ed8682ef, type: 3}

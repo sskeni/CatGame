@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private EnemyHealthBar healthBar;
     [SerializeField] private DamageNumber damageNumberPrefab;
     [SerializeField] private GameObject experienceOrbParticleSystemPrefab;
+    [SerializeField] private GameObject gearParticleSystemPrefab;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private ShakeData critShake;
     [SerializeField] private AudioClip damageSoundClip;
@@ -59,6 +60,8 @@ public class Enemy : MonoBehaviour, IDamageable
         if (wasCrit) SoundFXHandler.Instance.PlaySoundFXClip(damageCritSoundClip, transform, damageCritVolume, damageCritPitchRange, damageCritPitchRange); 
         else SoundFXHandler.Instance.PlaySoundFXClip(damageSoundClip, transform, damageVolume, damagePitchRange, damagePitchRange);
 
+        SpawnGears();
+
         if (wasCrit) CameraShakerHandler.Shake(critShake);
         if (currentHealth <= 0) Die();
     }
@@ -89,6 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable
             isDying = true;
             SpawnExperienceOrbs();
             SpawnCoins();
+            SpawnGears();
             RoomHandler.Instance.LowerEnemyCount(roomID.Item1, roomID.Item2);
             Destroy(gameObject);
         }
@@ -103,6 +107,16 @@ public class Enemy : MonoBehaviour, IDamageable
             p.transform.position = this.transform.position;
             p.GetComponent<ExperienceOrbParticleCollision>().experienceAmount = experienceAmount;
             p.GetComponent<ParticleSystem>().trigger.AddCollider(PlayerController.Instance.gameObject.GetComponent<BoxCollider2D>());
+            p.gameObject.SetActive(true);
+        }
+    }
+
+    private void SpawnGears()
+    {
+        if (gearParticleSystemPrefab != null)
+        {
+            GameObject p = Instantiate(gearParticleSystemPrefab);
+            p.transform.position = this.transform.position;
             p.gameObject.SetActive(true);
         }
     }

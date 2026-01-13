@@ -20,6 +20,8 @@ public abstract class Item
     public virtual void AddPlayerStats(PlayerStats stats, int stacks) { }
 
     public virtual void OnHit(PlayerStats stats, IDamageable damageable, float damage, int stacks) { }
+
+    public virtual void OnDelete(PlayerStats stats) { }
 }
 
 // Increases attack
@@ -98,7 +100,7 @@ public class CatFood : Item
     }
 }
 
-// Increases health regeneration rate
+// Increases health regeneration rate (deprecated)
 public class CatTreat : Item
 {
     public override string GiveName()
@@ -293,7 +295,7 @@ public class VampireFangs : Item
 
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
-        float modifier = 0.1f * stacks;
+        float modifier = 0.02f * stacks;
         stats.AddStat(GiveName(), modifier, Stat.Lifesteal);
     }
 
@@ -367,6 +369,11 @@ public class Mirror : Item
     public override void AddPlayerStats(PlayerStats stats, int stacks)
     {
         stats.lifestealDoesDamage = true;
+    }
+
+    public override void OnDelete(PlayerStats stats)
+    {
+        stats.lifestealDoesDamage = false;
     }
 }
 

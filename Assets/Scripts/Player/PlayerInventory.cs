@@ -15,7 +15,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         CheckSingleton();
-        SceneManager.sceneLoaded += ReloadAllItems;
+        //SceneManager.sceneLoaded += ReloadAllItems;
     }
 
     // Set up singleton
@@ -35,9 +35,14 @@ public class PlayerInventory : MonoBehaviour
     // Applies stat changes from all items to PlayerStats
     public void ReloadAllItems(Scene scene, LoadSceneMode mode)
     {
+        print("reloading all items");
+        PlayerStats.Instance.ResetAllStatsToBase();
+        PlayerStats.Instance.RemoveAllStatChanges();
+
         LevelUIManager.Instance.inventory.DeleteAllItemUI();
         foreach (ItemList i in items)
         {
+            print("loading item " + i.item.GiveName());
             i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
             LevelUIManager.Instance.inventory.AddItemUI(i);
         }
@@ -53,6 +58,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (ItemList i in items)
         {
+            print("loading item " + i.item.GiveName());
             i.item.AddPlayerStats(PlayerStats.Instance, i.stacks);
             LevelUIManager.Instance.inventory.AddItemUI(i);
         }
@@ -83,6 +89,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (i.name == item.GiveName())
             {
+                i.item.OnDelete(PlayerStats.Instance);
                 items.Remove(i);
                 break;
             }
@@ -111,6 +118,6 @@ public class PlayerInventory : MonoBehaviour
 
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= ReloadAllItems;
+        //SceneManager.sceneLoaded -= ReloadAllItems;
     }
 }

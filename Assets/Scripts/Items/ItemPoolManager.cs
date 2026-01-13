@@ -77,8 +77,8 @@ public class ItemPoolManager : MonoBehaviour
                 return new CatNip();
             case Items.CatFood:
                 return new CatFood();
-            case Items.CatTreat:
-                return new CatTreat();
+            /*case Items.CatTreat:
+                return new CatTreat();*/
             case Items.Milk:
                 return new Milk();
             case Items.LionMane:
@@ -113,7 +113,7 @@ public enum Items
     SharperClaws,
     CapNip,
     CatFood,
-    CatTreat,
+    //CatTreat,
     Milk,
     LionMane,
     LionClaw,

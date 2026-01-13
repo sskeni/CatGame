@@ -12,6 +12,11 @@ public class InventoryUI : MonoBehaviour
     // Private References
     List<GameObject> itemUIs = new List<GameObject>();
 
+    private void Start()
+    {
+        PlayerInventory.Instance.ReloadAllItems();
+    }
+
     private void Update()
     {
         UpdateUI();

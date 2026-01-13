@@ -21,6 +21,10 @@ public class RoomHandler : MonoBehaviour
     public int minCoinsAward;
     public int maxCoinsAward;
     public float roomDifficultyIncrease;
+    public float expandTime;
+    public float expandScale;
+    public float shrinkTime;
+    public float shrinkScale;
     
     // Public References
     [HideInInspector] public int roomsCleared;
@@ -69,14 +73,40 @@ public class RoomHandler : MonoBehaviour
         UpdateEnemyCountText();
     }
 
+    [ContextMenu("Show Room Clear Text")]
+    private void roomcleardebug()
+    {
+        StartCoroutine(ShowRoomClearText());
+    }
+
     // Shows the Room Clear UI
     private IEnumerator ShowRoomClearText()
     {
-        DifficultyHandler.Instance.difficulty += roomDifficultyIncrease;
-
         roomsCleared++;
         RunStatisticsHandler.Instance.totalRoomsCleared++;
         roomClearText.gameObject.SetActive(true);
+        /*yield return new WaitForSeconds(2f);
+        roomClearText.gameObject.SetActive(false);*/
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < expandTime)
+        {
+            float textScale = Mathf.Lerp(0, expandScale, (elapsedTime / expandTime));
+            elapsedTime += Time.deltaTime;
+            roomClearText.gameObject.transform.localScale = new Vector3(textScale, textScale, textScale);
+            yield return null;
+        }
+
+        elapsedTime = 0;
+        while (elapsedTime < shrinkTime)
+        {
+            float textScale = Mathf.Lerp(expandScale, shrinkScale, (elapsedTime / shrinkTime));
+            elapsedTime += Time.deltaTime;
+            roomClearText.gameObject.transform.localScale = new Vector3(textScale, textScale, textScale);
+            yield return null;
+        }
+
         yield return new WaitForSeconds(2f);
         roomClearText.gameObject.SetActive(false);
 

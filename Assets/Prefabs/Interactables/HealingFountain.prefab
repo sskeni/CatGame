@@ -227,7 +227,7 @@ MonoBehaviour:
   uiPrompt: {fileID: 3497584605556954945}
   costText: {fileID: 2904870248198016111}
   usedSprite: {fileID: 21300000, guid: 5284c271e8ed5c040bf19cc749949f32, type: 3}
-  pointLight: {fileID: 0}
+  pointLight: {fileID: 2474064666543712079}
   cost: 25
 --- !u!1 &836881929500763503
 GameObject:

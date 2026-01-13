@@ -28,6 +28,8 @@ public class EndScreenUI : MonoBehaviour
     // Opens the end screen and sets all the texts
     public void OpenUI()
     {
+        Time.timeScale = 0f;
+
         // Format time
         float timeStopped = Time.time;
         float totalTimeInSeconds = timeStopped - RunStatisticsHandler.Instance.runStartTime;
